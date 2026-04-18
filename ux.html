@@ -74,12 +74,39 @@
             background: linear-gradient(135deg, transparent 48%, rgba(0,0,0,0.02) 50%, transparent 52%);
             background-size: 16px 16px;
         }
+
+        /* Убираем скроллбар для горизонтальной навигации */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="selection:bg-primary selection:text-white pb-16 md:pb-32">
 
+    <!-- НАВИГАЦИОННЫЙ СТАТУС-БАР -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full bg-[#F9F9F9]/95 backdrop-blur-md border-b border-line z-50 transition-transform duration-300 transform -translate-y-full">
+        <div class="max-w-[1600px] mx-auto px-6 md:px-16 relative">
+            <!-- Progress Bar Line -->
+            <div class="absolute bottom-[-1px] left-0 h-[2px] bg-primary w-0 transition-all duration-150 ease-out z-10" id="scroll-progress"></div>
+            
+            <ul class="flex items-center gap-6 md:gap-8 overflow-x-auto no-scrollbar py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-tertiary whitespace-nowrap">
+                <li><a href="#metrics" class="nav-link hover:text-primary transition-colors" data-target="metrics">Метрики</a></li>
+                <li><a href="#context" class="nav-link hover:text-primary transition-colors" data-target="context">01. Контекст</a></li>
+                <li><a href="#tasks" class="nav-link hover:text-primary transition-colors" data-target="tasks">02. Задачи</a></li>
+                <li><a href="#benchmarking" class="nav-link hover:text-primary transition-colors" data-target="benchmarking">03. Анализ</a></li>
+                <li><a href="#ui" class="nav-link hover:text-primary transition-colors" data-target="ui">04. UI</a></li>
+                <li><a href="#validation" class="nav-link hover:text-primary transition-colors" data-target="validation">05. Валидация</a></li>
+                <li><a href="#insights" class="nav-link hover:text-primary transition-colors" data-target="insights">06. Итоги</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- HERO СЕКЦИЯ -->
-    <header class="pt-28 pb-16 md:pt-40 md:pb-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
+    <header id="hero" class="pt-28 pb-16 md:pt-40 md:pb-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-16">
             
             <!-- Заголовок: Колонки 1-11 -->
@@ -111,45 +138,37 @@
     </header>
 
     <!-- TL;DR СЕКЦИЯ -->
-    <section class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
+    <section id="metrics" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
             <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <h2 class="text-xs uppercase tracking-widest text-tertiary font-semibold">TL;DR / Метрики успеха</h2>
+                <h2 class="text-xs uppercase tracking-widest text-tertiary font-semibold">Метрики успеха</h2>
             </div>
             
             <!-- Метрика 1 -->
-            <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
-                <div class="text-4xl md:text-5xl font-light mb-3 md:mb-4">100%</div>
-                <div class="text-xs font-semibold uppercase tracking-widest mb-2 md:mb-3">Task Success Rate</div>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Проходимость новых сценариев кастомизации (тест на 74 пользователях).</p>
+            <div class="col-span-1 md:col-start-4 md:col-span-4 reveal counter-block">
+                <div class="text-4xl md:text-5xl font-light mb-3 md:mb-4"><span class="counter" data-target="100" data-suffix="%">0%</span></div>
+                <div class="text-xs font-semibold uppercase tracking-widest mb-2 md:mb-3">Проходимость сценария</div>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Успешность новых сценариев кастомизации (тест на 74 пользователях).</p>
             </div>
             
             <!-- Метрика 2 -->
-            <div class="col-span-1 md:col-start-8 md:col-span-4 reveal delay-100">
-                <div class="text-4xl md:text-5xl font-light mb-3 md:mb-4">4.5<span class="text-xl md:text-2xl text-tertiary">/5</span></div>
+            <div class="col-span-1 md:col-start-8 md:col-span-4 reveal delay-100 counter-block">
+                <div class="text-4xl md:text-5xl font-light mb-3 md:mb-4"><span class="counter" data-target="4.5" data-suffix="" data-float="true">0.0</span><span class="text-xl md:text-2xl text-tertiary">/5</span></div>
                 <div class="text-xs font-semibold uppercase tracking-widest mb-2 md:mb-3">Customer Effort Score</div>
                 <p class="text-secondary text-sm md:text-base leading-relaxed">Средняя оценка удобства интерфейса и процесса исключения.</p>
-            </div>
-
-            <!-- Итог -->
-            <div class="col-span-1 md:col-start-4 md:col-span-8 mt-4 md:mt-8 reveal">
-                <div class="p-6 md:p-8 bg-white border border-line">
-                    <div class="text-xs font-semibold uppercase tracking-widest mb-2 md:mb-3">Time-to-market</div>
-                    <p class="text-primary text-lg md:text-xl font-light leading-relaxed">Сокращение времени разработки: благодаря прототипу выявлены избыточные функции, отказ от которых сэкономит десятки часов фронтенда.</p>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- 01. КОНТЕКСТ -->
-    <section class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
+    <section id="context" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
             <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-12">01. Контекст и Проблема</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">01. Контекст и Проблема</div>
             </div>
 
             <!-- Вводный текст -->
@@ -167,12 +186,11 @@
             <!-- Блок "Боль пользователя" -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
                 <h4 class="text-lg font-semibold mb-4 md:mb-6 border-b border-line pb-3 md:pb-4">Боль пользователя</h4>
-                <p class="text-secondary mb-4 leading-relaxed">Чаще всего интерфейс ставит пользователя перед фактом: «Ешь так, как придумал шеф-повар». Единственный костыль — текстовый комментарий.</p>
+                <p class="text-secondary mb-4 leading-relaxed">Часто интерфейс не позволяет гибко настраивать блюдо. Единственный способ изменить состав — оставить текстовый комментарий.</p>
                 <ul class="list-disc pl-5 text-secondary space-y-2 mb-4 leading-relaxed">
-                    <li><strong class="text-primary font-medium">Безопасность:</strong> Аллергия, лактоза, диета.</li>
-                    <li><strong class="text-primary font-medium">Контекст:</strong> Встреча, перед которой нельзя лук.</li>
+                    <li><strong class="text-primary font-medium">Безопасность:</strong> Аллергия, непереносимость лактозы, диета.</li>
+                    <li><strong class="text-primary font-medium">Контекст:</strong> Важная встреча, перед которой нельзя есть определенные продукты.</li>
                 </ul>
-                <p class="text-secondary italic text-sm md:text-base">Писать об этом — тревожно. Неясно, прочитал ли повар.</p>
             </div>
 
             <!-- Блок "Боль бизнеса" -->
@@ -188,12 +206,12 @@
     </section>
 
     <!-- 02. ЗАДАЧИ И ГИПОТЕЗЫ -->
-    <section class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
+    <section id="tasks" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
             <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-12">02. Задачи и Гипотезы</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">02. Задачи и Гипотезы</div>
             </div>
 
             <!-- Текст -->
@@ -204,28 +222,28 @@
             <!-- Гипотеза 1 -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
                 <div class="h-full p-6 md:p-8 border border-line bg-white">
-                    <h4 class="text-xs font-bold uppercase tracking-widest mb-3 md:mb-4">Гипотеза удержания</h4>
-                    <p class="text-secondary text-sm md:text-base leading-relaxed">Если мы сделаем процесс исключения нежелательных ингредиентов визуальным, мы снизим страх ошибки на кухне. Это повысит конверсию среди аллергиков и «приверед».</p>
+                    <h4 class="text-xs font-bold uppercase tracking-widest mb-3 md:mb-4">Гипотеза 1</h4>
+                    <p class="text-secondary text-sm md:text-base leading-relaxed">Если в карточке товара сделать сценарий изменения блюда (исключение ингредиентов) интуитивно понятным и заметным, то пользователи с аллергиями или нелюбовью к конкретным продуктам (например, кинзе или луку) смогут легко адаптировать заказ под себя без написания ручных комментариев к заказу, что приведет к снижению количества ошибок на кухне (и возвратов блюд), а также повысит конверсию в добавление в корзину среди этой аудитории.</p>
                 </div>
             </div>
 
             <!-- Гипотеза 2 -->
             <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
                 <div class="h-full p-6 md:p-8 bg-primary text-white">
-                    <h4 class="text-xs font-bold uppercase tracking-widest text-tertiary mb-3 md:mb-4">Гипотеза выручки (AOV)</h4>
-                    <p class="text-[#e0e0e0] text-sm md:text-base leading-relaxed">Если внедрить витрину платных опций с прозрачным ценообразованием, пользователи будут чаще добавлять допы, что приведет к росту среднего чека.</p>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-tertiary mb-3 md:mb-4">Гипотеза 2</h4>
+                    <p class="text-[#e0e0e0] text-sm md:text-base leading-relaxed">Если в карточке блюда внедрить интуитивно понятный блок для добавления дополнительных платных ингредиентов, то пользователи смогут собирать более сытные блюда или усиливать вкус под свои предпочтения, что приведет к увеличению среднего чека (AOV — Average Order Value) и росту выручки с каждого заказа.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 03. БЕНЧМАРКИНГ -->
-    <section class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
+    <section id="benchmarking" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
             <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-12">03. Бенчмаркинг</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">03. Бенчмаркинг</div>
             </div>
 
             <!-- Заголовок -->
@@ -242,9 +260,8 @@
 
             <!-- Паттерн 1 -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
-                <h4 class="text-lg md:text-xl font-medium mb-1 md:mb-2">Подход моно-продуктов</h4>
-                <p class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary mb-4 md:mb-6">Пример: Пиццерии</p>
-                <p class="text-secondary mb-4 md:mb-6 leading-relaxed">Текущий состав в виде небольших кнопок или плашек.</p>
+                <h4 class="text-lg md:text-xl font-medium mb-1 md:mb-2">Паттерн: Компактные плашки</h4>
+                <p class="text-secondary mb-4 md:mb-6 mt-4 leading-relaxed">Текущий состав выводится в виде небольших кнопок или плашек.</p>
                 <div class="pt-4 border-t border-line">
                     <p class="text-sm text-secondary mb-2 md:mb-3"><strong class="text-primary">Плюсы:</strong> Наглядно, экономит место. Весь состав как на ладони.</p>
                     <p class="text-sm text-secondary"><strong class="text-primary">Минусы:</strong> Плохо для платных добавок (не влезает цена и порции).</p>
@@ -253,9 +270,8 @@
 
             <!-- Паттерн 2 -->
             <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
-                <h4 class="text-lg md:text-xl font-medium mb-1 md:mb-2">Подход агрегаторов</h4>
-                <p class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary mb-4 md:mb-6">Пример: Яндекс Еда, Wolt</p>
-                <p class="text-secondary mb-4 md:mb-6 leading-relaxed">Длинные списки (List items) с чекбоксами или радиобаттонами.</p>
+                <h4 class="text-lg md:text-xl font-medium mb-1 md:mb-2">Паттерн: Списки с чекбоксами</h4>
+                <p class="text-secondary mb-4 md:mb-6 mt-4 leading-relaxed">Используются вертикальные списки с чекбоксами или радиобаттонами.</p>
                 <div class="pt-4 border-t border-line">
                     <p class="text-sm text-secondary mb-2 md:mb-3"><strong class="text-primary">Плюсы:</strong> Идеально для апсейла. Видно название, граммовку и цену.</p>
                     <p class="text-sm text-secondary"><strong class="text-primary">Минусы:</strong> Список базовых ингредиентов делает карточку бесконечной.</p>
@@ -265,25 +281,25 @@
             <!-- Синтез -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 mt-4 md:mt-8 reveal">
                 <div class="bg-white p-6 md:p-8 border border-line">
-                    <span class="block text-xs uppercase tracking-widest text-tertiary font-semibold mb-3 md:mb-4">Синтез решения</span>
-                    <p class="text-base md:text-lg font-medium text-primary">Ни один из конкурентов не решает обе задачи идеально в рамках одного сложного блюда. Поэтому я решил скрестить два лучших паттерна рынка.</p>
+                    <span class="block text-xs uppercase tracking-widest text-tertiary font-semibold mb-3 md:mb-4">Итоговое решение</span>
+                    <p class="text-base md:text-lg font-medium text-primary">Оба подхода имеют свои ограничения в рамках сложного блюда с большим количеством опций. Поэтому было принято решение объединить логику плашек и списков.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 04. ПРОЕКТИРОВАНИЕ И UI -->
-    <section class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
+    <section id="ui" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
             <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-12">04. Проектирование & UI</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">04. Проектирование & UI</div>
             </div>
 
             <!-- Текст -->
             <div class="col-span-1 md:col-start-4 md:col-span-6 reveal md:mb-8">
-                <h3 class="text-2xl sm:text-3xl font-medium mb-4 md:mb-6">UI-Решения: Разделяй и властвуй</h3>
+                <h3 class="text-2xl sm:text-3xl font-medium mb-4 md:mb-6">Визуальное разделение функций</h3>
                 <p class="text-secondary text-base md:text-lg leading-relaxed">Главным вызовом было не устроить визуальную свалку. Я разделил сущности на уровне UI-паттернов, чтобы пользователь интуитивно понимал разницу между тем, что он убирает, и тем, за что доплачивает.</p>
             </div>
 
@@ -293,7 +309,7 @@
                     <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary">Шаг 01</span>
                 </div>
                 <h4 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Исключения (Состав)</h4>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Оформлены в виде компактных черных чипсов с крестиком. Исключения бесплатны. Это позволило уместить 10+ ингредиентов сложного блюда в один блок, сэкономив 3 экрана скролла.</p>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Оформлены в виде компактных чипсов с крестиком. Исключения бесплатны. Это позволило уместить 10+ ингредиентов сложного блюда в один блок, сэкономив 3 экрана скролла.</p>
             </div>
 
             <!-- Решение 2 -->
@@ -302,7 +318,7 @@
                     <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary">Шаг 02</span>
                 </div>
                 <h4 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Апсейл (Витрина добавок)</h4>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Полноценные строки с чекбоксами, фото и ценой. Отдельная витрина, где пользователю прозрачно видна стоимость шага («+1190 ₸») и есть выбор количества через степпер.</p>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Полноценные строки с чекбоксами и ценой. Отдельная витрина, где пользователю прозрачно видна стоимость добавки («+1190 ₸») и есть выбор количества через степпер.</p>
             </div>
 
             <!-- Изображение -->
@@ -316,7 +332,7 @@
             <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
                 <div class="p-5 md:p-6 bg-surface border border-line flex flex-col md:flex-row gap-4 md:gap-6 items-start">
                     <div class="md:w-1/4 shrink-0">
-                        <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-primary">Техника прототипа</span>
+                        <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-primary">Сборка для тестирования</span>
                     </div>
                     <div class="md:w-3/4">
                         <p class="text-sm text-secondary leading-relaxed">Для тестирования собран High-Fidelity прототип в Figma (Variables + If/Else). Цена пересчитывалась на лету, а компоненты взаимодействовали с глобальным счетчиком, давая полное ощущение реального приложения.</p>
@@ -328,12 +344,12 @@
     </section>
 
     <!-- 05. ВАЛИДАЦИЯ -->
-    <section class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
+    <section id="validation" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
             <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-12">05. Валидация</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">05. Валидация</div>
             </div>
 
             <!-- Инфо-блок -->
@@ -366,17 +382,17 @@
     </section>
 
     <!-- 06. ВЫВОДЫ И ИНСАЙТЫ -->
-    <section class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto">
+    <section id="insights" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12 md:gap-y-16">
             
             <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-12">06. Итоги и Инсайты</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">06. Итоги и Инсайты</div>
             </div>
 
             <!-- Вводный текст -->
             <div class="col-span-1 md:col-start-4 md:col-span-6 reveal md:mb-8">
-                <h3 class="text-2xl sm:text-3xl font-medium md:mb-6">Качественная обратная связь подсветила три критически важных продуктовых инсайта.</h3>
+                <h3 class="text-2xl sm:text-3xl font-medium md:mb-6">Обратная связь от 74 респондентов позволила не только подтвердить изначальные гипотезы, но и найти зоны для упрощения макета перед передачей в разработку.</h3>
             </div>
 
             <!-- Инсайты -->
@@ -386,12 +402,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-primary">
                     <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">01</div>
                     <div class="md:col-span-3 mb-2 md:mb-0">
-                        <h4 class="text-lg md:text-xl font-medium">Проблема доверия</h4>
-                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary font-semibold mt-1 md:mt-2">Интерфейс не лечит</p>
+                        <h4 class="text-lg md:text-xl font-medium">Интерфейс решает задачу, но не сразу меняет привычку</h4>
                     </div>
                     <div class="md:col-span-4">
-                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> При 100% успехе, 27% ответили, что всё равно написали бы дублирующий комментарий. Люди привыкли к ошибкам кухонь.</p>
-                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Идеальный интерфейс работает только в связке с операционкой. Доверие появится после 2-3 успешных заказов.</p>
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> Несмотря на 100% успешность выполнения сценария, 27% респондентов отметили, что всё равно продублировали бы свои исключения в комментариях к заказу.</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Паттерн недоверия к доставкам укоренен глубоко. Новый UI полностью решает механическую задачу (людям удобно и понятно, куда нажимать), но абсолютное доверие к кастомизации сформируется только после нескольких успешных доставок. Это нормально и ожидаемо для новой фичи.</p>
                     </div>
                 </div>
             </div>
@@ -401,12 +416,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-line">
                     <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">02</div>
                     <div class="md:col-span-3 mb-2 md:mb-0">
-                        <h4 class="text-lg md:text-xl font-medium">Баннерная слепота</h4>
-                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary font-semibold mt-1 md:mt-2">Экономия ресурса</p>
+                        <h4 class="text-lg md:text-xl font-medium">Отказ от избыточных статусов (экономим время разработки)</h4>
                     </div>
                     <div class="md:col-span-4">
-                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> В прототипе появлялась плашка «Изменено». Тест показал, что 77% её не заметили, фокусируясь на цене.</p>
-                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Отказываемся от сложной логики проверки состояний на фронтенде. Главный триггер — изменение суммы.</p>
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> В прототипе была заложена логика текстовых микро-статусов (появление плашки «Изменено»). Тест показал, что 77% пользователей её проигнорировали — они были сфокусированы исключительно на целевых действиях (составе и итоговой цене).</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Отказ от текстовых статусов в релизе снизит визуальный шум и сэкономит ресурсы разработки. Программистам не придется писать логику отслеживания этих плашек на фронтенде, так как главный триггер для юзера — это автоматический пересчет итоговой суммы.</p>
                     </div>
                 </div>
             </div>
@@ -416,12 +430,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-line md:pb-8 md:border-b">
                     <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">03</div>
                     <div class="md:col-span-3 mb-2 md:mb-0">
-                        <h4 class="text-lg md:text-xl font-medium">Защита кухни</h4>
-                        <p class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary font-semibold mt-1 md:mt-2">Фокус внимания</p>
+                        <h4 class="text-lg md:text-xl font-medium">Гипотеза с разделением UI-паттернов подтвердилась</h4>
                     </div>
                     <div class="md:col-span-4">
-                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> Открытые ответы показали, что блок удаления ингредиентов перетягивает внимание.</p>
-                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Смещаем блок исключений ниже. Оставляем на первом экране фокус на высокомаржинальные добавки.</p>
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> Изначально был риск, что использование разных стилей (компактные чипсы для бесплатных исключений и полноценные списки для платных добавок) может запутать пользователя.</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Показатель Task Success Rate в 100% доказал обратное. Пользователи с первой секунды считывают разницу между «составом блюда» и «витриной апсейла». Визуальное разделение этих сущностей полностью защитило себя на тестировании.</p>
                     </div>
                 </div>
             </div>
@@ -436,6 +449,30 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- ЛОГИКА АНИМАЦИИ ЧИСЕЛ ---
+            function animateValue(obj, start, end, duration, isFloat, suffix) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    let currentVal = start + easeProgress * (end - start);
+                    
+                    if (isFloat) {
+                        obj.innerHTML = currentVal.toFixed(1) + suffix;
+                    } else {
+                        obj.innerHTML = Math.floor(currentVal) + suffix;
+                    }
+                    
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        obj.innerHTML = (isFloat ? end.toFixed(1) : end) + suffix;
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -446,13 +483,78 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // observer.unobserve(entry.target); 
+                        
+                        if (entry.target.classList.contains('counter-block')) {
+                            const counterEl = entry.target.querySelector('.counter');
+                            if (counterEl && !counterEl.dataset.animated) {
+                                counterEl.dataset.animated = 'true';
+                                const target = parseFloat(counterEl.dataset.target);
+                                const isFloat = counterEl.dataset.float === 'true';
+                                const suffix = counterEl.dataset.suffix || '';
+                                animateValue(counterEl, 0, target, 2000, isFloat, suffix);
+                            }
+                        }
                     }
                 });
             }, observerOptions);
 
             document.querySelectorAll('.reveal').forEach((el) => {
                 observer.observe(el);
+            });
+
+            // --- ЛОГИКА НАВИГАЦИИ И СТАТУС-БАРА ---
+            const navbar = document.getElementById('navbar');
+            const hero = document.getElementById('hero');
+            const scrollProgress = document.getElementById('scroll-progress');
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                // Появление навбара
+                const heroBottom = hero.offsetTop + hero.offsetHeight;
+                if (window.scrollY > heroBottom - 100) {
+                    navbar.classList.remove('-translate-y-full');
+                } else {
+                    navbar.classList.add('-translate-y-full');
+                }
+
+                // Обновление прогресс-бара
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                scrollProgress.style.width = scrolled + "%";
+
+                // Подсветка активной секции
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    // Смещение для срабатывания чуть раньше, чем секция дойдет до верха
+                    if (pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('text-primary');
+                    if (link.getAttribute('data-target') === current) {
+                        link.classList.add('text-primary');
+                    }
+                });
+            });
+
+            // Плавный скролл при клике на ссылки в навбаре
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 60, // Учет высоты навбара
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
         });
     </script>
