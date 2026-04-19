@@ -522,10 +522,16 @@
                 <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">06. Итоговый результат</div>
             </div>
 
-            <!-- Изображение -->
+            <!-- Изображение со сменой по ховеру -->
             <div class="col-span-1 md:col-start-4 md:col-span-9 reveal">
-                <div class="w-full relative overflow-hidden rounded-xl border border-line bg-[#f0f0f0]">
-                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776610820/Frame_126_bol2uz.png" alt="Итоговый результат" class="w-full h-auto object-cover transform transition-transform duration-1000 hover:scale-[1.02]">
+                <div class="w-full relative overflow-hidden rounded-xl border border-line bg-[#f0f0f0] group cursor-default">
+                    <!-- Контейнер для единого увеличения (scale) обеих картинок -->
+                    <div class="w-full relative transform transition-transform duration-1000 group-hover:scale-[1.02]">
+                        <!-- Базовое фото -->
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776610820/Frame_126_bol2uz.png" alt="Итоговый результат" class="w-full h-auto object-cover transition-opacity duration-1000">
+                        <!-- Второе фото (накладывается поверх с плавным появлением) -->
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776612663/Frame_127_r7d5tt.png" alt="Итоговый результат (состояние 2)" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0 group-hover:opacity-100">
+                    </div>
                 </div>
             </div>
         </div>
