@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX/UI Product Designer | Портфолио</title>
+    
+    <!-- Шрифт Inter Tight -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Настройка Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter Tight"', 'sans-serif'],
+                    },
+                    colors: {
+                        surface: '#F9F9F9',
+                        line: '#E5E5E5',
+                        primary: '#111111',
+                        secondary: '#666666',
+                        tertiary: '#999999',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Базовые настройки */
+        body {
+            background-color: #F9F9F9;
+            color: #111111;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Плавные анимации появления (микро-сдвиг 16px) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+
+        /* Строгий плейсхолдер для пустых кейсов */
+        .img-placeholder {
+            background-color: #F0F0F0;
+            border: 1px solid #E5E5E5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .img-placeholder::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 48%, rgba(0,0,0,0.02) 50%, transparent 52%);
+            background-size: 16px 16px;
+        }
+    </style>
+</head>
+<body class="selection:bg-primary selection:text-white flex flex-col min-h-screen">
+
+    <!-- НАВИГАЦИЯ -->
+    <nav class="fixed top-0 left-0 w-full bg-[#F9F9F9]/90 backdrop-blur-md border-b border-line z-50">
+        <div class="max-w-[1600px] mx-auto px-6 md:px-16 flex justify-between items-center py-5">
+            <div class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-primary">
+                Product Designer
+            </div>
+            <ul class="flex gap-6 md:gap-8 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-tertiary">
+                <li><a href="#work" class="hover:text-primary transition-colors">Кейсы</a></li>
+                <li><a href="#global-footer" class="hover:text-primary transition-colors">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ГЛАВНЫЙ ЭКРАН (ИНТРО) -->
+    <header class="pt-40 md:pt-56 pb-20 md:pb-32 px-6 md:px-16 max-w-[1600px] mx-auto w-full">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8">
+            <div class="col-span-1 md:col-span-10 lg:col-span-9 reveal">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] tracking-tight text-primary mb-8 md:mb-12">
+                    Проектирую интерфейсы <br class="hidden md:block">
+                    <span class="text-tertiary">с фокусом на логику <br class="hidden md:block">и бизнес-метрики.</span>
+                </h1>
+                <p class="text-secondary text-lg md:text-2xl leading-relaxed max-w-3xl font-light">
+                    Помогаю сложным продуктам стать понятными. Перевожу хаос в строгие дизайн-системы и нахожу баланс между потребностями пользователей и целями бизнеса.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- СЕКЦИЯ КЕЙСОВ -->
+    <main id="work" class="flex-grow px-6 md:px-16 max-w-[1600px] mx-auto w-full pb-20 md:pb-40">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8">
+            
+            <!-- Заголовок секции -->
+            <div class="col-span-1 md:col-span-12 border-t border-line pt-10 md:pt-16 mb-10 md:mb-16 reveal">
+                <h2 class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary font-semibold">Избранные проекты</h2>
+            </div>
+
+            <!-- ГРИД КАРТОЧЕК -->
+            <div class="col-span-1 md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 md:gap-y-24">
+                
+                <!-- КАРТОЧКА 1: Кастомизация блюд -->
+                <a href="https://baskove33.github.io/nikproduct/ux" class="group block reveal delay-100">
+                    <!-- Обложка -->
+                    <div class="w-full aspect-[4/3] bg-[#f0f0f0] rounded-xl overflow-hidden mb-6 md:mb-8 border border-line relative">
+                        <!-- Используем красивый рендер из кейса для обложки -->
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776610820/Frame_126_bol2uz.png" alt="Кастомизация блюд" class="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-[1.03]">
+                        
+                        <!-- Оверлей при ховере (опционально, легкое затемнение) -->
+                        <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                    
+                    <!-- Мета-теги -->
+                    <div class="flex gap-4 mb-3 md:mb-4">
+                        <span class="text-[10px] uppercase tracking-widest text-primary font-semibold border border-line px-2 py-1 rounded-sm">FoodTech</span>
+                        <span class="text-[10px] uppercase tracking-widest text-tertiary font-semibold py-1">UX/UI</span>
+                    </div>
+                    
+                    <!-- Название -->
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl md:text-3xl font-medium text-primary group-hover:text-secondary transition-colors duration-300">Кастомизация блюд в доставке</h3>
+                        <!-- Иконка стрелки -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-tertiary transform -rotate-45 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <!-- Краткое описание -->
+                    <p class="text-secondary mt-3 md:mt-4 text-sm md:text-base leading-relaxed max-w-[90%]">
+                        Как дать пользователю контроль над едой, снизить количество возвратов и поднять средний чек ресторана.
+                    </p>
+                </a>
+
+                <!-- КАРТОЧКА 2: Пустышка для будущего кейса -->
+                <a href="#" class="group block reveal delay-200">
+                    <!-- Обложка (Плейсхолдер) -->
+                    <div class="img-placeholder w-full aspect-[4/3] rounded-xl mb-6 md:mb-8 border border-line group-hover:border-primary/20 transition-colors duration-500">
+                        <span class="text-xs md:text-sm font-mono text-tertiary relative z-10">[Скоро появится]</span>
+                    </div>
+                    
+                    <!-- Мета-теги -->
+                    <div class="flex gap-4 mb-3 md:mb-4">
+                        <span class="text-[10px] uppercase tracking-widest text-primary font-semibold border border-line px-2 py-1 rounded-sm">FinTech</span>
+                        <span class="text-[10px] uppercase tracking-widest text-tertiary font-semibold py-1">Product</span>
+                    </div>
+                    
+                    <!-- Название -->
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-2xl md:text-3xl font-medium text-primary group-hover:text-secondary transition-colors duration-300">Название следующего проекта</h3>
+                        <!-- Иконка стрелки -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-tertiary opacity-0 transform -rotate-45 group-hover:opacity-100 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <!-- Краткое описание -->
+                    <p class="text-secondary mt-3 md:mt-4 text-sm md:text-base leading-relaxed max-w-[90%]">
+                        Короткое описание бизнес-задачи, которую решал интерфейс, и достигнутых результатов.
+                    </p>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ПОДКЛЮЧЕНИЕ ГЛОБАЛЬНОГО ФУТЕРА -->
+    <div id="global-footer"></div>
+    <script src="footer.js"></script>
+
+    <!-- Скрипт для анимаций -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Отключаем наблюдение после появления, чтобы анимация проигрывалась один раз
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
