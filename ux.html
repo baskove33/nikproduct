@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кастомизация блюд | Strict Grid Layout</title>
+    <title>Кастомизация блюд | Product Case Study</title>
     
-    <!-- Шрифт Inter Tight -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Настройка Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -42,7 +39,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Супер-плавные анимации появления (микро-сдвиг 16px) */
+        /* Супер-плавные анимации появления */
         .reveal {
             opacity: 0;
             transform: translateY(16px);
@@ -55,25 +52,6 @@
         }
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
-
-        /* Строгий плейсхолдер */
-        .img-placeholder {
-            background-color: #F0F0F0;
-            border: 1px solid #E5E5E5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .img-placeholder::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 48%, rgba(0,0,0,0.02) 50%, transparent 52%);
-            background-size: 16px 16px;
-        }
 
         /* Убираем скроллбар для горизонтальной навигации */
         .no-scrollbar::-webkit-scrollbar {
@@ -92,7 +70,7 @@
         }
         .accordion-content > div {
             overflow: hidden;
-            min-width: 0; /* Фикс: запрещаем контенту растягивать CSS Grid на мобильных */
+            min-width: 0;
         }
         .accordion-content.expanded {
             grid-template-rows: 1fr;
@@ -101,10 +79,8 @@
 </head>
 <body class="selection:bg-primary selection:text-white">
 
-    <!-- НАВИГАЦИОННЫЙ СТАТУС-БАР -->
     <nav id="navbar" class="fixed top-0 left-0 w-full bg-[#F9F9F9]/95 backdrop-blur-md border-b border-line z-50 transition-transform duration-300 transform -translate-y-full">
         <div class="max-w-[1600px] mx-auto px-6 md:px-16 relative">
-            <!-- Progress Bar Line -->
             <div class="absolute bottom-[-1px] left-0 h-[2px] bg-primary w-0 transition-all duration-150 ease-out z-10" id="scroll-progress"></div>
             
             <ul class="flex items-center gap-6 md:gap-8 overflow-x-auto no-scrollbar py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-tertiary whitespace-nowrap">
@@ -120,18 +96,15 @@
         </div>
     </nav>
 
-    <!-- HERO СЕКЦИЯ -->
     <header id="hero" class="relative pt-28 pb-0 md:pt-40 md:pb-0 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line overflow-hidden">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 relative z-10 pb-20 md:pb-40">
 
-            <!-- Текст и Мета (Колонки 1-10) -->
             <div class="col-span-1 md:col-span-10 lg:col-span-9 flex flex-col justify-center z-10 relative">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight reveal mb-10 md:mb-16 text-primary">
-                    Кастомизация блюд в доставке: <br>
-                    <span class="text-secondary block mt-2">Как дать контроль над едой и поднять средний чек</span>
+                    Кастомизация блюд в&nbsp;доставке: <br>
+                    <span class="text-secondary block mt-2">Как дать контроль над едой и&nbsp;поднять средний чек</span>
                 </h1>
 
-                <!-- Мета-блоки -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 reveal delay-100 max-w-[700px] relative z-30">
                     <div>
                         <div class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary mb-1 md:mb-2 font-semibold">Роль</div>
@@ -149,114 +122,99 @@
             </div>
         </div>
 
-        <!-- ОГРОМНЫЙ МОКАП, ПОВЕРХ ВСЕГО (Z-20) -->
         <div class="absolute bottom-0 right-[-10%] sm:right-[-5%] md:right-0 lg:right-[5%] w-[85%] sm:w-[70%] md:w-[50%] lg:w-[45%] max-w-[800px] z-20 pointer-events-none reveal delay-300">
-            <!-- Сдвигаем картинку вниз, обрезая нижнюю часть контейнером, чтобы экран казался колоссальным -->
             <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776598869/iPhone_yxf3ko.png" alt="Мокап интерфейса" class="w-full h-auto object-contain transform translate-y-[20%] md:translate-y-[25%] lg:translate-y-[20%] hover:translate-y-[18%] md:hover:translate-y-[23%] lg:hover:translate-y-[18%] transition-transform duration-1000 pointer-events-auto">
         </div>
     </header>
 
-    <!-- TL;DR СЕКЦИЯ -->
     <section id="metrics" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
-            <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
                 <h2 class="text-xs uppercase tracking-widest text-tertiary font-semibold">Метрики успеха</h2>
             </div>
             
-            <!-- Метрика 1 -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal counter-block">
                 <div class="text-4xl md:text-5xl font-light mb-3 md:mb-4"><span class="counter" data-target="100" data-suffix="%">0%</span></div>
                 <div class="text-xs font-semibold uppercase tracking-widest mb-2 md:mb-3">Проходимость сценария</div>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Успешность новых сценариев кастомизации (тест на 74 пользователях).</p>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Успешность новых сценариев кастомизации (тест на&nbsp;74&nbsp;пользователях).</p>
             </div>
             
-            <!-- Метрика 2 -->
             <div class="col-span-1 md:col-start-8 md:col-span-4 reveal delay-100 counter-block">
                 <div class="text-4xl md:text-5xl font-light mb-3 md:mb-4"><span class="counter" data-target="4.5" data-suffix="" data-float="true">0.0</span><span class="text-xl md:text-2xl text-tertiary">/5</span></div>
                 <div class="text-xs font-semibold uppercase tracking-widest mb-2 md:mb-3">Customer Effort Score</div>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Средняя оценка удобства интерфейса и процесса исключения.</p>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Средняя оценка удобства интерфейса и&nbsp;процесса исключения.</p>
             </div>
         </div>
     </section>
 
-    <!-- 01. КОНТЕКСТ -->
     <section id="context" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
-            <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">01. Контекст и Проблема</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">01. Контекст и&nbsp;Проблема</div>
             </div>
 
-            <!-- Вводный текст -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
-                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium leading-snug mb-8 md:mb-16">Индустрия доставки еды летит вперед: горячее за 15 минут, отслеживание по карте. Но в настройке самого блюда мы всё еще застряли в прошлом.</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium leading-snug mb-8 md:mb-16">Индустрия доставки еды летит вперед: горячее за&nbsp;15 минут, отслеживание по&nbsp;карте. Но&nbsp;в&nbsp;настройке самого блюда мы всё еще застряли в&nbsp;прошлом.</h3>
             </div>
 
-            <!-- Фото -->
             <div class="col-span-1 md:col-start-4 md:col-span-9 mb-4 md:mb-16 reveal">
-                <div class="w-full relative overflow-hidden rounded-xl border border-line bg-[#f0f0f0]">
-                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776599643/Frame_15_lsyj2y.png" alt="Скриншоты проблем доставки" class="w-full h-auto object-cover transform transition-transform duration-1000 hover:scale-[1.02]">
+                <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776599643/Frame_15_lsyj2y.png" alt="Скриншоты проблем доставки" class="w-full h-auto object-cover">
                 </div>
             </div>
 
-            <!-- Блок "Боль пользователя" -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
                 <h4 class="text-lg font-semibold mb-4 md:mb-6 border-b border-line pb-3 md:pb-4">Боль пользователя</h4>
-                <p class="text-secondary mb-4 leading-relaxed">Часто интерфейс не позволяет гибко настраивать блюдо. Единственный способ изменить состав — оставить текстовый комментарий.</p>
+                <p class="text-secondary mb-4 leading-relaxed">Часто интерфейс не&nbsp;позволяет гибко настраивать блюдо. Единственный способ изменить состав&nbsp;— оставить текстовый комментарий.</p>
                 <ul class="list-disc pl-5 text-secondary space-y-2 mb-4 leading-relaxed">
                     <li><strong class="text-primary font-medium">Безопасность:</strong> Аллергия, непереносимость лактозы, диета.</li>
                     <li><strong class="text-primary font-medium">Контекст:</strong> Важная встреча, перед которой нельзя есть определенные продукты.</li>
                 </ul>
             </div>
 
-            <!-- Блок "Боль бизнеса" -->
             <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
                 <h4 class="text-lg font-semibold mb-4 md:mb-6 border-b border-line pb-3 md:pb-4">Боль бизнеса</h4>
-                <p class="text-secondary mb-4 leading-relaxed">Для ресторана отсутствие понятного конструктора выливается в прямые и скрытые убытки:</p>
+                <p class="text-secondary mb-4 leading-relaxed">Для ресторана отсутствие понятного конструктора выливается в&nbsp;прямые и&nbsp;скрытые убытки:</p>
                 <ul class="list-disc pl-5 text-secondary space-y-2 leading-relaxed">
-                    <li><strong class="text-primary font-medium">Возвраты:</strong> Повар не увидел комментарий ➝ клиент возвращает блюдо ➝ сервис делает возврат и получает негатив.</li>
-                    <li><strong class="text-primary font-medium">Упущенная выгода:</strong> Просьба «побольше сыра» в тексте — это упущенная продажа платной добавки.</li>
+                    <li><strong class="text-primary font-medium">Возвраты:</strong> Повар не&nbsp;увидел комментарий ➝ клиент возвращает блюдо ➝ сервис делает возврат и&nbsp;получает негатив.</li>
+                    <li><strong class="text-primary font-medium">Упущенная выгода:</strong> Просьба «побольше сыра» в&nbsp;тексте — это упущенная продажа платной добавки.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- 02. ЗАДАЧИ И ГИПОТЕЗЫ -->
     <section id="tasks" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
-            <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">02. Задачи и Гипотезы</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">02. Задачи и&nbsp;Гипотезы</div>
             </div>
 
-            <!-- Текст -->
             <div class="col-span-1 md:col-start-4 md:col-span-6 reveal md:mb-8">
-                <p class="text-xl sm:text-2xl font-light text-primary leading-snug">Бизнес-задача заключалась в проектировании интуитивно понятного интерфейса внутри карточки блюда. На старте были сформулированы две продуктовые гипотезы.</p>
+                <p class="text-xl sm:text-2xl font-light text-primary leading-snug">Бизнес-задача заключалась в&nbsp;проектировании интуитивного интерфейса внутри карточки блюда. На&nbsp;старте были сформулированы продуктовые гипотезы.</p>
             </div>
 
             <!-- Гипотеза 1 -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
-                <div class="h-full p-6 md:p-8 border border-line bg-white">
+                <div class="h-full p-6 md:p-8 border border-line bg-white rounded-2xl">
                     <h4 class="text-xs font-bold uppercase tracking-widest mb-3 md:mb-4">Гипотеза 1</h4>
-                    <p class="text-secondary text-sm md:text-base leading-relaxed">Если в карточке товара сделать сценарий изменения блюда (исключение ингредиентов) интуитивно понятным и заметным, то пользователи с аллергиями или нелюбовью к конкретным продуктам (например, кинзе или луку) смогут легко адаптировать заказ под себя без написания ручных комментариев к заказу, что приведет к снижению количества ошибок на кухне (и возвратов блюд), а также повысит конверсию в добавление в корзину среди этой аудитории.</p>
+                    <p class="text-secondary text-sm md:text-base leading-relaxed">Если сделать исключение ингредиентов интуитивно понятным, пользователи с&nbsp;аллергиями смогут легко адаптировать заказ, что снизит количество возвратов и&nbsp;ошибок на&nbsp;кухне.</p>
                 </div>
             </div>
 
             <!-- Гипотеза 2 -->
             <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
-                <div class="h-full p-6 md:p-8 bg-primary text-white">
+                <div class="h-full p-6 md:p-8 bg-primary text-white rounded-2xl">
                     <h4 class="text-xs font-bold uppercase tracking-widest text-tertiary mb-3 md:mb-4">Гипотеза 2</h4>
-                    <p class="text-[#e0e0e0] text-sm md:text-base leading-relaxed">Если в карточке блюда внедрить интуитивно понятный блок для добавления дополнительных платных ингредиентов, то пользователи смогут собирать более сытные блюда или усиливать вкус под свои предпочтения, что приведет к увеличению среднего чека (AOV — Average Order Value) и росту выручки с каждого заказа.</p>
+                    <p class="text-[#e0e0e0] text-sm md:text-base leading-relaxed">Если внедрить понятный блок платных добавок, пользователи будут чаще усиливать блюда, что приведет к&nbsp;росту выручки и&nbsp;увеличению среднего чека (AOV).</p>
                 </div>
             </div>
 
-            <!-- Гипотеза 3 (Полупрозрачный аккордеон) -->
+            <!-- Гипотеза 3 -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 mt-2 md:mt-4 reveal md:delay-200">
-                <div class="border border-line/60 bg-[#f7f7f7] group">
+                <div class="border border-line/60 bg-[#f7f7f7] group rounded-2xl overflow-hidden">
                     <button class="accordion-btn w-full px-6 py-6 md:px-8 md:py-6 flex justify-between items-center text-left focus:outline-none gap-4">
                         <div>
                             <h4 class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary mb-1 md:mb-2">
@@ -267,13 +225,12 @@
                         <span class="accordion-icon text-2xl font-light text-tertiary transition-colors duration-300 shrink-0">+</span>
                     </button>
                     <div class="accordion-content">
-                        <!-- Дополнительный пустой div для полного схлопывания аккордеона в 0px -->
                         <div>
                             <div class="px-6 pb-6 md:px-8 md:pb-8 pt-0 md:pt-2">
-                                <p class="text-secondary text-sm md:text-base leading-relaxed mb-8">Если добавить в интерфейс карточки быстрые кнопки/пресеты для адаптации блюда под определенные нужды (например, «фитнес/больше белка», «без майонеза/соуса»), то пользователи со специфическими диетами будут быстрее находить нужную конфигурацию, не тратя время на ручной перебор состава, что приведет к сокращению времени на оформление заказа (Time-to-task) и повысит лояльность (возвращаемость) таких клиентов за счет ощущения заботы.</p>
+                                <p class="text-secondary text-sm md:text-base leading-relaxed mb-8">Быстрые пресеты диет («фитнес», «без лука») сократят время заказа (Time-to-task) и&nbsp;повысят лояльность специфической аудитории за&nbsp;счет ощущения заботы.</p>
                                 
-                                <div class="w-full relative overflow-hidden rounded-xl border border-line bg-[#f0f0f0]">
-                                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776606856/Frame_124_eipowm.png" alt="Пресеты для диет" class="w-full h-auto object-cover transform transition-transform duration-1000 hover:scale-[1.02]">
+                                <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776606856/Frame_124_eipowm.png" alt="Пресеты для диет" class="w-full h-auto object-cover">
                                 </div>
                             </div>
                         </div>
@@ -287,140 +244,128 @@
     <section id="benchmarking" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
-            <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
-                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">03. Бенчмаркинг</div>
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">03. Анализ</div>
             </div>
 
-            <!-- Заголовок -->
             <div class="col-span-1 md:col-start-4 md:col-span-6 reveal">
-                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium md:mb-12">Анализ FoodTech-рынка: поиск паттернов кастомизации.</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium md:mb-12">Паттерны кастомизации на&nbsp;уровне насмотренности.</h3>
             </div>
 
-            <!-- Изображение -->
             <div class="col-span-1 md:col-start-4 md:col-span-9 md:mb-12 reveal">
-                <div class="w-full relative overflow-hidden rounded-xl border border-line bg-[#f0f0f0]">
-                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776600791/Frame_18_rpfxbf.png" alt="Анализ рынка" class="w-full h-auto object-cover transform transition-transform duration-1000 hover:scale-[1.02]">
+                <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776600791/Frame_18_rpfxbf.png" alt="Анализ рынка" class="w-full h-auto object-cover">
                 </div>
             </div>
 
-            <!-- Паттерн 1 -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
                 <h4 class="text-lg md:text-xl font-medium mb-1 md:mb-2">Паттерн: Компактные плашки</h4>
-                <p class="text-secondary mb-4 md:mb-6 mt-4 leading-relaxed">Текущий состав выводится в виде небольших кнопок или плашек.</p>
+                <p class="text-secondary mb-4 md:mb-6 mt-4 leading-relaxed">Текущий состав выводится в&nbsp;виде небольших кнопок.</p>
                 <div class="pt-4 border-t border-line">
-                    <p class="text-sm text-secondary mb-2 md:mb-3"><strong class="text-primary">Плюсы:</strong> Наглядно, экономит место. Весь состав как на ладони.</p>
-                    <p class="text-sm text-secondary"><strong class="text-primary">Минусы:</strong> Плохо для платных добавок (не влезает цена и порции).</p>
+                    <p class="text-sm text-secondary mb-2 md:mb-3"><strong class="text-primary">Плюсы:</strong> Наглядно, экономит место. Весь состав как на&nbsp;ладони.</p>
+                    <p class="text-sm text-secondary"><strong class="text-primary">Минусы:</strong> Плохо для платных добавок (не&nbsp;влезает цена и&nbsp;порции).</p>
                 </div>
             </div>
 
-            <!-- Паттерн 2 -->
             <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
                 <h4 class="text-lg md:text-xl font-medium mb-1 md:mb-2">Паттерн: Списки с чекбоксами</h4>
-                <p class="text-secondary mb-4 md:mb-6 mt-4 leading-relaxed">Используются вертикальные списки с чекбоксами или радиобаттонами.</p>
+                <p class="text-secondary mb-4 md:mb-6 mt-4 leading-relaxed">Используются вертикальные списки с&nbsp;чекбоксами.</p>
                 <div class="pt-4 border-t border-line">
-                    <p class="text-sm text-secondary mb-2 md:mb-3"><strong class="text-primary">Плюсы:</strong> Идеально для апсейла. Видно название, граммовку и цену.</p>
+                    <p class="text-sm text-secondary mb-2 md:mb-3"><strong class="text-primary">Плюсы:</strong> Идеально для апсейла. Видно название, граммовку и&nbsp;цену.</p>
                     <p class="text-sm text-secondary"><strong class="text-primary">Минусы:</strong> Список базовых ингредиентов делает карточку бесконечной.</p>
                 </div>
             </div>
 
-            <!-- Синтез -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 mt-4 md:mt-8 reveal">
-                <div class="bg-white p-6 md:p-8 border border-line">
+                <div class="bg-white p-6 md:p-8 border border-line rounded-2xl">
                     <span class="block text-xs uppercase tracking-widest text-tertiary font-semibold mb-3 md:mb-4">Итоговое решение</span>
-                    <p class="text-base md:text-lg font-medium text-primary">Оба подхода имеют свои ограничения в рамках сложного блюда с большим количеством опций. Поэтому было принято решение объединить логику плашек и списков.</p>
+                    <p class="text-base md:text-lg font-medium text-primary">Опираясь на&nbsp;насмотренность в&nbsp;FoodTech, я&nbsp;выделил два паттерна. Оба подхода имеют свои ограничения, поэтому было принято решение объединить логику плашек и&nbsp;списков.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 04. ПРОЕКТИРОВАНИЕ И UI -->
     <section id="ui" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
-            <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
                 <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">04. Проектирование & UI</div>
             </div>
 
-            <!-- Текст -->
             <div class="col-span-1 md:col-start-4 md:col-span-6 reveal md:mb-8">
                 <h3 class="text-2xl sm:text-3xl font-medium mb-4 md:mb-6">Визуальное разделение функций</h3>
-                <p class="text-secondary text-base md:text-lg leading-relaxed">Главным вызовом было не устроить визуальную свалку. Я разделил сущности на уровне UI-паттернов, чтобы пользователь интуитивно понимал разницу между тем, что он убирает, и тем, за что доплачивает.</p>
+                <p class="text-secondary text-base md:text-lg leading-relaxed">Главным вызовом было не&nbsp;устроить визуальную свалку. Я разделил сущности на&nbsp;уровне UI-паттернов, чтобы пользователь интуитивно понимал разницу между тем, что он убирает, и&nbsp;тем, за&nbsp;что доплачивает.</p>
             </div>
 
-            <!-- Решение 1 -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
                 <div class="pb-3 md:pb-4 border-b border-line mb-3 md:mb-4">
                     <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary">Шаг 01</span>
                 </div>
                 <h4 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Исключения (Состав)</h4>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Оформлены в виде компактных чипсов с крестиком. Исключения бесплатны. Это позволило уместить 10+ ингредиентов сложного блюда в один блок, сэкономив 3 экрана скролла.</p>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Оформлены в&nbsp;виде компактных чипсов с&nbsp;крестиком. Исключения бесплатны. Это позволило уместить 10+ ингредиентов сложного блюда в&nbsp;один блок.</p>
             </div>
 
-            <!-- Решение 2 -->
             <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
                 <div class="pb-3 md:pb-4 border-b border-line mb-3 md:mb-4">
                     <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary">Шаг 02</span>
                 </div>
                 <h4 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Апсейл (Витрина добавок)</h4>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Полноценные строки с чекбоксами и ценой. Отдельная витрина, где пользователю прозра видна стоимость добавки («+1190 ₸») и есть выбор количества через степпер.</p>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Полноценные строки с&nbsp;чекбоксами и&nbsp;ценой. Витрина, где прозрачно видна стоимость добавки и&nbsp;есть выбор количества через степпер.</p>
             </div>
 
-            <!-- Изображение -->
             <div class="col-span-1 md:col-start-4 md:col-span-9 md:my-8 reveal">
-                <div class="w-full relative overflow-hidden rounded-xl border border-line bg-[#f0f0f0]">
-                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776611083/Frame_125_pdufyq.png" alt="UI макеты кастомизации" class="w-full h-auto object-cover transform transition-transform duration-1000 hover:scale-[1.02]">
+                <div class="flex flex-col gap-6 md:gap-10">
+                    <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776713506/Frame_129_n3coee.png" alt="UI макет 1" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776713506/Frame_130_an83lp.png" alt="UI макет 2" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776713506/Frame_131_ls96to.png" alt="UI макет 3" class="w-full h-auto object-cover">
+                    </div>
                 </div>
             </div>
 
-            <!-- Under the hood -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
-                <div class="p-6 md:p-8 bg-surface border border-line flex flex-col items-start">
-                    <p class="w-full text-sm md:text-base text-secondary leading-relaxed mb-6">Для тестирования собран High-Fidelity прототип в Figma (Variables + If/Else). Цена пересчитывалась на лету, а компоненты взаимодействовали с глобальным счетчиком, давая полное ощущение реального приложения.</p>
-                    <button id="openModalBtn" class="px-6 py-3 bg-line hover:bg-primary text-primary hover:text-white text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors duration-300 focus:outline-none">Посмотреть</button>
+                <div class="p-6 md:p-8 bg-surface border border-line rounded-2xl flex flex-col items-start">
+                    <p class="w-full text-sm md:text-base text-secondary leading-relaxed mb-6">Для тестирования собран High-Fidelity прототип в&nbsp;Figma. Цена пересчитывалась на&nbsp;лету, а&nbsp;компоненты взаимодействовали с&nbsp;глобальным счетчиком, давая полное ощущение реального приложения.</p>
+                    <button id="openModalBtn" class="px-6 py-3 bg-line hover:bg-primary text-primary hover:text-white text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors duration-300 focus:outline-none">Открыть прототип</button>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- 05. ВАЛИДАЦИЯ -->
     <section id="validation" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
             
-            <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
                 <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">05. Валидация</div>
             </div>
 
-            <!-- Вводный блок и Аккордеон -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
                 <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium mb-8 md:mb-12">UX-Тестирование</h3>
                 
-                <!-- Характеристики теста -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-12">
                     <div class="pb-4 border-b border-line">
                         <span class="block text-[10px] md:text-xs uppercase tracking-widest text-tertiary font-semibold mb-1 md:mb-2">Выборка</span>
-                        <p class="text-base md:text-lg font-medium">74 респондента</p>
+                        <p class="text-base md:text-lg font-medium">74&nbsp;респондента</p>
                     </div>
                     <div class="pb-4 border-b border-line sm:col-span-1">
                         <span class="block text-[10px] md:text-xs uppercase tracking-widest text-tertiary font-semibold mb-1 md:mb-2">Сценарий</span>
-                        <p class="text-sm text-secondary leading-relaxed">Удалить лук и кунжут, добавить платную порцию креветок.</p>
+                        <p class="text-sm text-secondary leading-relaxed">Удалить лук и&nbsp;кунжут, добавить платную порцию креветок.</p>
                     </div>
                 </div>
 
-                <!-- Аккордеон с таблицами результатов -->
                 <div class="w-full border-t border-primary">
                     
-                    <!-- Группа 1: Подтвержденные гипотезы -->
                     <div class="border-b border-line group">
                         <button class="accordion-btn w-full py-6 flex justify-between items-center text-left focus:outline-none gap-4">
                             <span class="text-lg md:text-xl font-medium pr-4">Подтвержденные решения</span>
                             <span class="accordion-icon text-2xl font-light text-tertiary transition-colors duration-300 shrink-0">+</span>
                         </button>
                         <div class="accordion-content">
-                            <!-- Изолируем паддинги для корректного схлопывания -->
                             <div>
                                 <div class="pb-8 pt-2">
                                     <div class="w-full overflow-x-auto no-scrollbar">
@@ -439,7 +384,7 @@
                                                         <span class="block text-primary font-mono font-medium mb-2">100%</span>
                                                         <span class="inline-block px-2 py-1 bg-green-50 text-green-700 border border-green-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Подтверждено</span>
                                                     </td>
-                                                    <td class="py-4 align-top text-secondary leading-relaxed">Сценарий изменения состава через чипсы не вызвал сложностей ни у одного респондента.</td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Сценарий изменения состава через чипсы не&nbsp;вызвал сложностей.</td>
                                                 </tr>
                                                 <tr class="border-b border-line/50">
                                                     <td class="py-4 pr-4 align-top text-primary font-medium">Проходимость апсейла</td>
@@ -447,7 +392,7 @@
                                                         <span class="block text-primary font-mono font-medium mb-2">100%</span>
                                                         <span class="inline-block px-2 py-1 bg-green-50 text-green-700 border border-green-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Подтверждено</span>
                                                     </td>
-                                                    <td class="py-4 align-top text-secondary leading-relaxed">Пользователи уверенно находили витрину добавок и пополняли блюдо платными опциями.</td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Пользователи уверенно находили витрину добавок и&nbsp;пополняли блюдо.</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="py-4 pr-4 align-top text-primary font-medium">Оценка удобства</td>
@@ -455,7 +400,7 @@
                                                         <span class="block text-primary font-mono font-medium mb-2">4.5/5</span>
                                                         <span class="inline-block px-2 py-1 bg-green-50 text-green-700 border border-green-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Подтверждено</span>
                                                     </td>
-                                                    <td class="py-4 align-top text-secondary leading-relaxed">Высокий балл CES доказал, что визуальное разделение двух паттернов сработало идеально.</td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Визуальное разделение двух паттернов сработало идеально.</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -465,14 +410,12 @@
                         </div>
                     </div>
 
-                    <!-- Группа 2: Зоны роста и опровергнутые гипотезы -->
                     <div class="border-b border-line group">
                         <button class="accordion-btn w-full py-6 flex justify-between items-center text-left focus:outline-none gap-4">
-                            <span class="text-lg md:text-xl font-medium pr-4">Зоны роста и неожиданные результаты</span>
+                            <span class="text-lg md:text-xl font-medium pr-4">Зоны роста и&nbsp;неожиданные результаты</span>
                             <span class="accordion-icon text-2xl font-light text-tertiary transition-colors duration-300 shrink-0">+</span>
                         </button>
                         <div class="accordion-content">
-                            <!-- Изолируем паддинги для корректного схлопывания -->
                             <div>
                                 <div class="pb-8 pt-2">
                                     <div class="w-full overflow-x-auto no-scrollbar">
@@ -486,12 +429,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr class="border-b border-line/50">
-                                                    <td class="py-4 pr-4 align-top text-primary font-medium">Доверие к интерфейсу</td>
+                                                    <td class="py-4 pr-4 align-top text-primary font-medium">Доверие к&nbsp;интерфейсу</td>
                                                     <td class="py-4 pr-4 align-top">
                                                         <span class="block text-primary font-mono font-medium mb-2">27%</span>
                                                         <span class="inline-block px-2 py-1 bg-red-50 text-red-600 border border-red-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Не подтверждено</span>
                                                     </td>
-                                                    <td class="py-4 align-top text-secondary leading-relaxed">Ответили, что продублируют свои действия текстовым комментарием для кухни «на всякий случай». Требуется время на адаптацию.</td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Продублируют исключения текстом «на&nbsp;всякий случай». Требуется время на&nbsp;адаптацию к&nbsp;фиче.</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="py-4 pr-4 align-top text-primary font-medium">Заметность статусов</td>
@@ -499,7 +442,7 @@
                                                         <span class="block text-primary font-mono font-medium mb-2">77%</span>
                                                         <span class="inline-block px-2 py-1 bg-red-50 text-red-600 border border-red-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Не подтверждено</span>
                                                     </td>
-                                                    <td class="py-4 align-top text-secondary leading-relaxed">Не заметили плашку «Изменено», сфокусировавшись на итоговой цене. Рекомендован отказ от фичи в пользу экономии часов разработки.</td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Не&nbsp;заметили плашку «Изменено». Отказ от&nbsp;фичи в&nbsp;пользу экономии часов разработки.</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -514,83 +457,68 @@
         </div>
     </section>
 
-    <!-- 06. ИТОГОВЫЙ РЕЗУЛЬТАТ -->
     <section id="result" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
-            <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
                 <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">06. Итоговый результат</div>
             </div>
 
-            <!-- Изображение со сменой по ховеру -->
+            <!-- Чистая статичная картинка без раздражающих ховеров -->
             <div class="col-span-1 md:col-start-4 md:col-span-9 reveal">
-                <div class="w-full relative overflow-hidden rounded-xl border border-line bg-[#f0f0f0] group cursor-default">
-                    <!-- Контейнер для единого увеличения (scale) обеих картинок -->
-                    <div class="w-full relative transform transition-transform duration-1000 group-hover:scale-[1.02]">
-                        <!-- Базовое фото -->
-                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776610820/Frame_126_bol2uz.png" alt="Итоговый результат" class="w-full h-auto object-cover transition-opacity duration-1000">
-                        <!-- Второе фото (накладывается поверх с плавным появлением) -->
-                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776612663/Frame_127_r7d5tt.png" alt="Итоговый результат (состояние 2)" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0 group-hover:opacity-100">
-                    </div>
+                <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776610820/Frame_126_bol2uz.png" alt="Итоговый результат" class="w-full h-auto object-cover">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 07. ВЫВОДЫ -->
     <section id="conclusions" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12 md:gap-y-16">
             
-            <!-- Лейбл -->
             <div class="col-span-1 md:col-span-3 reveal">
                 <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">07. Выводы</div>
             </div>
 
-            <!-- Вводный текст -->
             <div class="col-span-1 md:col-start-4 md:col-span-6 reveal md:mb-8">
-                <h3 class="text-2xl sm:text-3xl font-medium md:mb-6">Обратная связь от 74 респондентов позволила не только подтвердить изначальные гипотезы, но и найти зоны для упрощения макета перед передачей в разработку.</h3>
+                <h3 class="text-2xl sm:text-3xl font-medium md:mb-6">Итоговое решение успешно закрыло бизнес-задачу: мы&nbsp;дали пользователям понятный контроль над едой, что напрямую влияет на&nbsp;снижение возвратов и&nbsp;рост среднего чека.</h3>
+                <p class="text-secondary text-base md:text-lg">UX-тестирование подтвердило гипотезы, но&nbsp;также выявило важные зоны для упрощения макета перед разработкой.</p>
             </div>
-
-            <!-- Инсайты -->
             
-            <!-- Инсайт 01 -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
                 <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-primary">
                     <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">01</div>
                     <div class="md:col-span-3 mb-2 md:mb-0">
-                        <h4 class="text-lg md:text-xl font-medium">Интерфейс решает задачу, но не сразу меняет привычку</h4>
+                        <h4 class="text-lg md:text-xl font-medium">Интерфейс решает задачу, но&nbsp;не&nbsp;сразу меняет привычку</h4>
                     </div>
                     <div class="md:col-span-4">
-                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> Несмотря на 100% успешность выполнения сценария, 27% респондентов отметили, что всё равно продублировали бы свои исключения в комментариях к заказу.</p>
-                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Паттерн недоверия к доставкам укоренен глубоко. Новый UI полностью решает механическую задачу (людям удобно и понятно, куда нажимать), но абсолютное доверие к кастомизации сформируется только после нескольких успешных доставок. Это нормально и ожидаемо для новой фичи.</p>
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> 27% респондентов отметили, что всё равно продублировали&nbsp;бы свои исключения в&nbsp;комментариях к&nbsp;заказу.</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line rounded-2xl leading-relaxed"><strong class="font-semibold">Вывод:</strong> Паттерн недоверия к&nbsp;доставкам укоренен глубоко. Новый UI решает задачу (людям удобно нажимать), но&nbsp;абсолютное доверие к&nbsp;кастомизации сформируется только после нескольких успешных доставок.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Инсайт 02 -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
                 <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-line">
                     <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">02</div>
                     <div class="md:col-span-3 mb-2 md:mb-0">
-                        <h4 class="text-lg md:text-xl font-medium">Отказ от избыточных статусов (экономим время разработки)</h4>
+                        <h4 class="text-lg md:text-xl font-medium">Отказ от&nbsp;избыточных статусов (экономим время)</h4>
                     </div>
                     <div class="md:col-span-4">
-                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> В прототипе была заложена логика текстовых микро-статусов (появление плашки «Изменено»). Тест показал, что 77% пользователей её проигнорировали — они были сфокусированы исключительно на целевых действиях (составе и итоговой цене).</p>
-                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Отказ от текстовых статусов в релизе снизит визуальный шум и сэкономит ресурсы разработки. Программистам не придется писать логику отслеживания этих плашек на фронтенде, так как главный триггер для юзера — это автоматический пересчет итоговой суммы.</p>
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> В&nbsp;прототипе была заложена логика текстовых микро-статусов (плашка «Изменено»). 77% пользователей её проигнорировали.</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line rounded-2xl leading-relaxed"><strong class="font-semibold">Вывод:</strong> Отказ от&nbsp;текстовых статусов снизит визуальный шум и&nbsp;сэкономит ресурсы разработки. Главный триггер для юзера — автоматический пересчет итоговой суммы.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Инсайт 03 -->
             <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
                 <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-line md:pb-8 md:border-b">
                     <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">03</div>
                     <div class="md:col-span-3 mb-2 md:mb-0">
-                        <h4 class="text-lg md:text-xl font-medium">Гипотеза с разделением UI-паттернов подтвердилась</h4>
+                        <h4 class="text-lg md:text-xl font-medium">Гипотеза с&nbsp;разделением паттернов подтвердилась</h4>
                     </div>
                     <div class="md:col-span-4">
-                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> Изначально был риск, что использование разных стилей (компактные чипсы для бесплатных исключений и полноценные списки для платных добавок) может запутать пользователя.</p>
-                        <p class="text-sm text-primary bg-white p-4 border border-line leading-relaxed"><strong class="font-semibold">Вывод:</strong> Показатель Task Success Rate в 100% доказал обратное. Пользователи с первой секунды считывают разницу между «составом блюда» и «витриной апсейла». Визуальное разделение этих сущностей полностью защитило себя на тестировании.</p>
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> Изначально был риск, что использование разных стилей (чипсы для исключений и&nbsp;списки для добавок) может запутать пользователя.</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line rounded-2xl leading-relaxed"><strong class="font-semibold">Вывод:</strong> Показатель Task Success Rate в&nbsp;100% доказал обратное. Пользователи с&nbsp;первой секунды считывают разницу между «составом блюда» и&nbsp;«витриной апсейла».</p>
                     </div>
                 </div>
             </div>
@@ -598,31 +526,26 @@
         </div>
     </section>
 
-    <!-- ГЛОБАЛЬНЫЙ ФУТЕР -->
     <div id="global-footer"></div>
     <script src="footer.js"></script>
 
-    <!-- МОДАЛЬНОЕ ОКНО -->
     <div id="imageModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-4 md:p-12">
-        <!-- Фон -->
         <div id="modalBackdrop" class="absolute inset-0 bg-[#111]/90 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-pointer"></div>
         
-        <!-- Кнопка закрытия (фиксированная в углу) -->
         <button id="closeModalBtn" class="fixed top-4 right-4 md:top-8 md:right-8 z-[110] w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur transition-colors duration-300 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
 
-        <!-- Контент -->
         <div id="modalContent" class="relative z-10 max-w-5xl w-full transform scale-95 opacity-0 transition-all duration-300 flex justify-center">
-            <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776605693/Section_1_vimlhs.png" alt="Схема прототипа" class="w-full max-h-[85vh] object-contain rounded-xl shadow-2xl">
+            <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1776605693/Section_1_vimlhs.png" alt="Схема прототипа" class="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl">
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- ЛОГИКА АНИМАЦИИ ЧИСЕЛ ---
+            // АНИМАЦИИ ЧИСЕЛ
             function animateValue(obj, start, end, duration, isFloat, suffix) {
                 let startTimestamp = null;
                 const step = (timestamp) => {
@@ -675,7 +598,7 @@
                 observer.observe(el);
             });
 
-            // --- ЛОГИКА НАВИГАЦИИ И СТАТУС-БАРА ---
+            // НАВИГАЦИЯ
             const navbar = document.getElementById('navbar');
             const hero = document.getElementById('hero');
             const scrollProgress = document.getElementById('scroll-progress');
@@ -683,7 +606,6 @@
             const navLinks = document.querySelectorAll('.nav-link');
 
             window.addEventListener('scroll', () => {
-                // Появление навбара
                 const heroBottom = hero.offsetTop + hero.offsetHeight;
                 if (window.scrollY > heroBottom - 100) {
                     navbar.classList.remove('-translate-y-full');
@@ -691,17 +613,14 @@
                     navbar.classList.add('-translate-y-full');
                 }
 
-                // Обновление прогресс-бара
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
                 scrollProgress.style.width = scrolled + "%";
 
-                // Подсветка активной секции
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    // Смещение для срабатывания чуть раньше, чем секция дойдет до верха
                     if (pageYOffset >= (sectionTop - 150)) {
                         current = section.getAttribute('id');
                     }
@@ -715,7 +634,6 @@
                 });
             });
 
-            // Плавный скролл при клике на ссылки в навбаре
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -723,20 +641,19 @@
                     const targetSection = document.getElementById(targetId);
                     if (targetSection) {
                         window.scrollTo({
-                            top: targetSection.offsetTop - 60, // Учет высоты навбара
+                            top: targetSection.offsetTop - 60,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
 
-            // --- ЛОГИКА АККОРДЕОНА ---
+            // АККОРДЕОН
             document.querySelectorAll('.accordion-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const group = this.closest('.group');
                     const content = group.querySelector('.accordion-content');
                     const icon = group.querySelector('.accordion-icon');
-                    // Ищем заголовок гипотезы, который нужно перекрасить
                     const title = group.querySelector('.hypothesis-title');
                     
                     content.classList.toggle('expanded');
@@ -745,7 +662,6 @@
                         icon.textContent = '−';
                         icon.classList.add('text-primary');
                         icon.classList.remove('text-tertiary');
-                        // Перекрашиваем заголовок в черный
                         if (title) {
                             title.classList.add('text-primary');
                             title.classList.remove('text-tertiary');
@@ -754,7 +670,6 @@
                         icon.textContent = '+';
                         icon.classList.remove('text-primary');
                         icon.classList.add('text-tertiary');
-                        // Возвращаем серый цвет
                         if (title) {
                             title.classList.remove('text-primary');
                             title.classList.add('text-tertiary');
@@ -763,7 +678,7 @@
                 });
             });
 
-            // --- ЛОГИКА МОДАЛЬНОГО ОКНА ---
+            // МОДАЛЬНОЕ ОКНО
             const modal = document.getElementById('imageModal');
             const openBtn = document.getElementById('openModalBtn');
             const closeBtn = document.getElementById('closeModalBtn');
@@ -772,23 +687,21 @@
 
             function openModal() {
                 modal.classList.remove('hidden');
-                // Даем браузеру отрисовать display:block перед запуском анимации
                 requestAnimationFrame(() => {
                     backdrop.classList.remove('opacity-0');
                     content.classList.remove('scale-95', 'opacity-0');
                     content.classList.add('scale-100', 'opacity-100');
                 });
-                document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
+                document.body.style.overflow = 'hidden';
             }
 
             function closeModal() {
                 backdrop.classList.add('opacity-0');
                 content.classList.remove('scale-100', 'opacity-100');
                 content.classList.add('scale-95', 'opacity-0');
-                // Ждем окончания анимации (300ms)
                 setTimeout(() => {
                     modal.classList.add('hidden');
-                    document.body.style.overflow = ''; // Возвращаем скролл
+                    document.body.style.overflow = '';
                 }, 300);
             }
 
