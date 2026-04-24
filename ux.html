@@ -529,11 +529,11 @@
         </div>
     </section>
 
+    <!-- ПОДКЛЮЧЕНИЕ ГЛОБАЛЬНОГО ХЕДЕРА И ФУТЕРА -->
+    <div id="global-header"></div>
+    <script src="header.js"></script>
     <div id="global-footer"></div>
     <script src="footer.js"></script>
-
-    <!-- ОВЕРЛЕЙ ДЛЯ АНИМАЦИИ ПЕРЕХОДА (ИЗМЕНЕН ЦВЕТ НА bg-[#F9F9F9]) -->
-    <div id="transition-overlay" class="fixed inset-0 bg-[#F9F9F9] z-[9999] pointer-events-none transition-transform duration-700 ease-[cubic-bezier(0.7,0,0.3,1)] translate-y-full"></div>
 
     <!-- Скрипт для анимаций -->
     <script>
@@ -574,41 +574,6 @@
                 };
                 window.requestAnimationFrame(step);
             }
-
-            // Анимация при загрузке (когда возвращаемся с кейса)
-            const overlay = document.getElementById('transition-overlay');
-            
-            if (overlay) {
-                // ИСПРАВЛЕНИЕ: Мгновенно отключаем анимацию, ставим шторку по центру
-                overlay.style.transition = 'none';
-                overlay.style.transform = 'translateY(0)';
-                
-                // В следующем кадре возвращаем анимацию и убираем шторку вниз
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        overlay.style.transition = '';
-                        overlay.style.transform = 'translateY(100%)';
-                    });
-                });
-            }
-
-            document.querySelectorAll('.project-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = this.getAttribute('href');
-                    
-                    if (overlay) {
-                        // Шторка выезжает снизу и перекрывает экран
-                        overlay.style.transform = 'translateY(0)';
-                        
-                        setTimeout(() => {
-                            window.location.assign(target);
-                        }, 600);
-                    } else {
-                        window.location.assign(target);
-                    }
-                });
-            });
 
             // Наблюдатель за появлением элементов
             const observerOptions = {
