@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кастомизация блюд | UX Case Study</title>
+    <title>Кастомизация блюд | Product Case Study</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Подключаем Lenis для премиального плавного скролла -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['"Inter Tight"', 'sans-serif'] },
+                    fontFamily: {
+                        sans: ['"Inter Tight"', 'sans-serif'],
+                    },
                     colors: {
                         surface: '#F9F9F9',
                         line: '#E5E5E5',
@@ -30,14 +34,50 @@
     </script>
 
     <style>
-        body { background-color: #F9F9F9; color: #111111; -webkit-font-smoothing: antialiased; }
-        .reveal { opacity: 0; transform: translateY(16px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* Базовые настройки */
+        body {
+            background-color: #F9F9F9;
+            color: #111111;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Супер-плавные анимации появления */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
         .delay-100 { transition-delay: 100ms; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .accordion-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .accordion-content > div { overflow: hidden; min-width: 0; }
-        .accordion-content.expanded { grid-template-rows: 1fr; }
+        .delay-200 { transition-delay: 200ms; }
+
+        /* Убираем скроллбар для горизонтальной навигации */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Аккордеон (Грид-транзишн для плавного открытия) */
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .accordion-content > div {
+            overflow: hidden;
+            min-width: 0;
+        }
+        .accordion-content.expanded {
+            grid-template-rows: 1fr;
+        }
     </style>
 </head>
 <body class="selection:bg-primary selection:text-white">
@@ -45,6 +85,7 @@
     <nav id="navbar" class="fixed top-0 left-0 w-full bg-[#F9F9F9]/95 backdrop-blur-md border-b border-line z-50 transition-transform duration-300 transform -translate-y-full">
         <div class="max-w-[1600px] mx-auto px-6 md:px-16 relative">
             <div class="absolute bottom-[-1px] left-0 h-[2px] bg-primary w-0 transition-all duration-150 ease-out z-10" id="scroll-progress"></div>
+            
             <ul class="flex items-center gap-6 md:gap-8 overflow-x-auto no-scrollbar py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-tertiary whitespace-nowrap">
                 <li><a href="#metrics" class="nav-link hover:text-primary transition-colors" data-target="metrics">Метрики</a></li>
                 <li><a href="#context" class="nav-link hover:text-primary transition-colors" data-target="context">01. Контекст</a></li>
@@ -60,11 +101,13 @@
 
     <header id="hero" class="relative pt-28 pb-0 md:pt-40 md:pb-0 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line overflow-hidden">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 relative z-10 pb-20 md:pb-40">
+
             <div class="col-span-1 md:col-span-10 lg:col-span-9 flex flex-col justify-center z-10 relative">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight reveal mb-10 md:mb-16 text-primary">
                     Кастомизация блюд в&nbsp;доставке: <br>
                     <span class="text-secondary block mt-2">Как дать контроль над едой и&nbsp;поднять средний чек</span>
                 </h1>
+
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 reveal delay-100 max-w-[700px] relative z-30">
                     <div>
                         <div class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary mb-1 md:mb-2 font-semibold">Роль</div>
@@ -72,7 +115,7 @@
                     </div>
                     <div>
                         <div class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary mb-1 md:mb-2 font-semibold">Проект</div>
-                        <div class="text-sm md:text-base font-medium text-primary">Кейс Tanuki</div>
+                        <div class="text-sm md:text-base font-medium text-primary">Улучшение сценария (Tanuki)</div>
                     </div>
                     <div>
                         <div class="text-[10px] md:text-xs uppercase tracking-widest text-tertiary mb-1 md:mb-2 font-semibold">Платформа</div>
@@ -81,145 +124,432 @@
                 </div>
             </div>
         </div>
+
         <div class="absolute bottom-0 right-[-10%] sm:right-[-5%] md:right-0 lg:right-[5%] w-[85%] sm:w-[70%] md:w-[50%] lg:w-[45%] max-w-[800px] z-20 pointer-events-none reveal delay-300">
-            <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776598869/iPhone_yxf3ko.png" alt="Мокап" fetchpriority="high" class="w-full h-auto object-contain transform translate-y-[20%] md:translate-y-[25%] hover:translate-y-[23%] transition-transform duration-1000 pointer-events-auto">
+            <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776598869/iPhone_yxf3ko.png" alt="Мокап интерфейса" fetchpriority="high" class="w-full h-auto object-contain transform translate-y-[20%] md:translate-y-[25%] lg:translate-y-[20%] hover:translate-y-[18%] md:hover:translate-y-[23%] lg:hover:translate-y-[18%] transition-transform duration-1000 pointer-events-auto">
         </div>
     </header>
 
     <section id="metrics" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
+            
             <div class="col-span-1 md:col-span-3 reveal">
                 <h2 class="text-xs uppercase tracking-widest text-tertiary font-semibold">Метрики успеха</h2>
             </div>
+            
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal counter-block">
                 <div class="text-4xl md:text-5xl font-light mb-3 md:mb-4"><span class="counter" data-target="100" data-suffix="%">0%</span></div>
                 <div class="text-xs font-semibold uppercase tracking-widest mb-2 md:mb-3">Проходимость сценария</div>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Успешность сценариев на&nbsp;74&nbsp;пользователях.</p>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Успешность новых сценариев кастомизации (тест на&nbsp;74&nbsp;пользователях).</p>
             </div>
+            
             <div class="col-span-1 md:col-start-8 md:col-span-4 reveal delay-100 counter-block">
                 <div class="text-4xl md:text-5xl font-light mb-3 md:mb-4"><span class="counter" data-target="4.5" data-suffix="" data-float="true">0.0</span><span class="text-xl md:text-2xl text-tertiary">/5</span></div>
                 <div class="text-xs font-semibold uppercase tracking-widest mb-2 md:mb-3">Customer Effort Score</div>
-                <p class="text-secondary text-sm md:text-base leading-relaxed">Средняя оценка удобства интерфейса.</p>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Средняя оценка удобства интерфейса и&nbsp;процесса исключения.</p>
             </div>
         </div>
     </section>
 
     <section id="context" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
-            <div class="col-span-1 md:col-span-3 reveal"><div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">01. Контекст</div></div>
+            
+            <div class="col-span-1 md:col-span-3 reveal">
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">01. Контекст и&nbsp;Проблема</div>
+            </div>
+
             <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
-                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium mb-8 md:mb-16">В&nbsp;настройке блюда мы всё еще застряли в&nbsp;прошлом. Единственный способ изменить состав&nbsp;— комментарий.</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium leading-snug mb-8 md:mb-16">Индустрия доставки еды летит вперед: горячее за&nbsp;15 минут, отслеживание по&nbsp;карте. Но&nbsp;в&nbsp;настройке самого блюда мы всё еще застряли в&nbsp;прошлом.</h3>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-9 mb-4 md:mb-16 reveal">
                 <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
-                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776599643/Frame_15_lsyj2y.png" alt="Проблемы" class="w-full h-auto">
+                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776599643/Frame_15_lsyj2y.png" alt="Скриншоты проблем доставки" class="w-full h-auto object-cover">
                 </div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
+                <h4 class="text-lg font-semibold mb-4 md:mb-6 border-b border-line pb-3 md:pb-4">Боль пользователя</h4>
+                <p class="text-secondary mb-4 leading-relaxed">Часто интерфейс не&nbsp;позволяет гибко настраивать блюдо. Единственный способ изменить состав&nbsp;— оставить текстовый комментарий.</p>
+                <ul class="list-disc pl-5 text-secondary space-y-2 mb-4 leading-relaxed">
+                    <li><strong class="text-primary font-medium">Безопасность:</strong> Аллергия, непереносимость лактозы, диета.</li>
+                    <li><strong class="text-primary font-medium">Контекст:</strong> Важная встреча, перед которой нельзя есть определенные продукты.</li>
+                </ul>
+            </div>
+
+            <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
+                <h4 class="text-lg font-semibold mb-4 md:mb-6 border-b border-line pb-3 md:pb-4">Боль бизнеса</h4>
+                <p class="text-secondary mb-4 leading-relaxed">Для ресторана отсутствие понятного конструктора выливается в&nbsp;прямые и&nbsp;скрытые убытки:</p>
+                <ul class="list-disc pl-5 text-secondary space-y-2 leading-relaxed">
+                    <li><strong class="text-primary font-medium">Возвраты:</strong> Повар не&nbsp;увидел комментарий ➝ клиент возвращает блюдо ➝ сервис делает возврат и&nbsp;получает негатив.</li>
+                    <li><strong class="text-primary font-medium">Упущенная выгода:</strong> Просьба «побольше сыра» в&nbsp;тексте — это упущенная продажа платной добавки.</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section id="tasks" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10">
-            <div class="col-span-1 md:col-span-3 reveal"><div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">02. Задачи</div></div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
+            
+            <div class="col-span-1 md:col-span-3 reveal">
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">02. Задачи и&nbsp;Гипотезы</div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-6 reveal md:mb-8">
+                <p class="text-xl sm:text-2xl font-light text-primary leading-snug">Бизнес-задача заключалась в&nbsp;проектировании интуитивного интерфейса внутри карточки блюда. На&nbsp;старте были сформулированы продуктовые гипотезы.</p>
+            </div>
+
+            <!-- Гипотеза 1 -->
             <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
                 <div class="h-full p-6 md:p-8 border border-line bg-white rounded-2xl">
                     <h4 class="text-xs font-bold uppercase tracking-widest mb-3 md:mb-4">Гипотеза 1</h4>
-                    <p class="text-secondary text-sm md:text-base">Если сделать исключение ингредиентов понятным, снизится количество возвратов и&nbsp;ошибок кухни.</p>
+                    <p class="text-secondary text-sm md:text-base leading-relaxed">Если сделать исключение ингредиентов интуитивно понятным, пользователи с&nbsp;аллергиями смогут легко адаптировать заказ, что снизит количество возвратов и&nbsp;ошибок на&nbsp;кухне.</p>
                 </div>
             </div>
-            <div class="col-span-1 md:col-start-8 md:col-span-4 reveal delay-100">
+
+            <!-- Гипотеза 2 -->
+            <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
                 <div class="h-full p-6 md:p-8 bg-primary text-white rounded-2xl">
                     <h4 class="text-xs font-bold uppercase tracking-widest text-tertiary mb-3 md:mb-4">Гипотеза 2</h4>
-                    <p class="text-[#e0e0e0] text-sm md:text-base">Внедрение блока платных добавок приведет к&nbsp;росту выручки и&nbsp;среднего чека (AOV).</p>
+                    <p class="text-[#e0e0e0] text-sm md:text-base leading-relaxed">Если внедрить понятный блок платных добавок, пользователи будут чаще усиливать блюда, что приведет к&nbsp;росту выручки и&nbsp;увеличению среднего чека (AOV).</p>
                 </div>
             </div>
-            <div class="col-span-1 md:col-start-4 md:col-span-8 mt-4 reveal">
+
+            <!-- Гипотеза 3 -->
+            <div class="col-span-1 md:col-start-4 md:col-span-8 mt-2 md:mt-4 reveal md:delay-200">
                 <div class="border border-line/60 bg-[#f7f7f7] group rounded-2xl overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-6 flex justify-between items-center text-left focus:outline-none">
-                        <span class="hypothesis-title text-base font-medium text-tertiary">Гипотеза 3 (пресеты диет)</span>
-                        <span class="accordion-icon text-2xl font-light text-tertiary shrink-0">+</span>
+                    <button class="accordion-btn w-full px-6 py-6 md:px-8 md:py-6 flex justify-between items-center text-left focus:outline-none gap-4">
+                        <div>
+                            <h4 class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary mb-1 md:mb-2">
+                                Гипотеза 3 <span class="normal-case font-normal tracking-normal opacity-70 ml-1">(не получила этап ux тестов)</span>
+                            </h4>
+                            <span class="hypothesis-title text-base md:text-lg font-medium text-tertiary transition-colors duration-300">Быстрые пресеты для специфических диет</span>
+                        </div>
+                        <span class="accordion-icon text-2xl font-light text-tertiary transition-colors duration-300 shrink-0">+</span>
                     </button>
                     <div class="accordion-content">
-                        <div><div class="px-6 pb-6"><img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776606856/Frame_124_eipowm.png" class="w-full rounded-2xl border border-line"></div></div>
+                        <div>
+                            <div class="px-6 pb-6 md:px-8 md:pb-8 pt-0 md:pt-2">
+                                <p class="text-secondary text-sm md:text-base leading-relaxed mb-8">Быстрые пресеты диет («фитнес», «без лука») сократят время заказа (Time-to-task) и&nbsp;повысят лояльность специфической аудитории за&nbsp;счет ощущения заботы.</p>
+                                
+                                <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776606856/Frame_124_eipowm.png" alt="Пресеты для диет" class="w-full h-auto object-cover">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 03. БЕНЧМАРКИНГ -->
     <section id="benchmarking" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12">
-            <div class="col-span-1 md:col-span-3 reveal"><div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">03. Анализ</div></div>
-            <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
-                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium mb-12">Паттерны кастомизации на&nbsp;уровне насмотренности.</h3>
-                <div class="bg-white p-8 border border-line rounded-2xl mb-12">
-                    <p class="text-base md:text-lg">Опираясь на&nbsp;насмотренность в&nbsp;FoodTech, я&nbsp;объединил логику «плашек» (для состава) и&nbsp;«списков» (для апсейла).</p>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
+            
+            <div class="col-span-1 md:col-span-3 reveal">
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">03. Анализ</div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-6 reveal">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium md:mb-12">Паттерны кастомизации на&nbsp;уровне насмотренности.</h3>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-9 md:mb-12 reveal">
+                <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776600791/Frame_18_rpfxbf.png" alt="Анализ рынка" class="w-full h-auto object-cover">
                 </div>
-                <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776600791/Frame_18_rpfxbf.png" class="w-full rounded-2xl border border-line">
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
+                <h4 class="text-lg md:text-xl font-medium mb-1 md:mb-2">Паттерн: Компактные плашки</h4>
+                <p class="text-secondary mb-4 md:mb-6 mt-4 leading-relaxed">Текущий состав выводится в&nbsp;виде небольших кнопок.</p>
+                <div class="pt-4 border-t border-line">
+                    <p class="text-sm text-secondary mb-2 md:mb-3"><strong class="text-primary">Плюсы:</strong> Наглядно, экономит место. Весь состав как на&nbsp;ладони.</p>
+                    <p class="text-sm text-secondary"><strong class="text-primary">Минусы:</strong> Плохо для платных добавок (не&nbsp;влезает цена и&nbsp;порции).</p>
+                </div>
+            </div>
+
+            <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
+                <h4 class="text-lg md:text-xl font-medium mb-1 md:mb-2">Паттерн: Списки с чекбоксами</h4>
+                <p class="text-secondary mb-4 md:mb-6 mt-4 leading-relaxed">Используются вертикальные списки с&nbsp;чекбоксами.</p>
+                <div class="pt-4 border-t border-line">
+                    <p class="text-sm text-secondary mb-2 md:mb-3"><strong class="text-primary">Плюсы:</strong> Идеально для апсейла. Видно название, граммовку и&nbsp;цену.</p>
+                    <p class="text-sm text-secondary"><strong class="text-primary">Минусы:</strong> Список базовых ингредиентов делает карточку бесконечной.</p>
+                </div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-8 mt-4 md:mt-8 reveal">
+                <div class="bg-white p-6 md:p-8 border border-line rounded-2xl">
+                    <span class="block text-xs uppercase tracking-widest text-tertiary font-semibold mb-3 md:mb-4">Итоговое решение</span>
+                    <p class="text-base md:text-lg font-medium text-primary">Опираясь на&nbsp;насмотренность в&nbsp;FoodTech, я&nbsp;выделил два паттерна. Оба подхода имеют свои ограничения, поэтому было принято решение объединить логику плашек и&nbsp;списков.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="ui" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12">
-            <div class="col-span-1 md:col-span-3 reveal"><div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">04. Проектирование</div></div>
-            <div class="col-span-1 md:col-start-4 md:col-span-9 reveal">
-                <div class="flex flex-col gap-10">
-                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776713506/Frame_129_n3coee.png" class="w-full rounded-2xl border border-line">
-                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776713506/Frame_130_an83lp.png" class="w-full rounded-2xl border border-line">
-                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776713506/Frame_131_ls96to.png" class="w-full rounded-2xl border border-line">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
+            
+            <div class="col-span-1 md:col-span-3 reveal">
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">04. Проектирование & UI</div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-6 reveal md:mb-8">
+                <h3 class="text-2xl sm:text-3xl font-medium mb-4 md:mb-6">Визуальное разделение функций</h3>
+                <p class="text-secondary text-base md:text-lg leading-relaxed">Главным вызовом было не&nbsp;устроить визуальную свалку. Я разделил сущности на&nbsp;уровне UI-паттернов, чтобы пользователь интуитивно понимал разницу между тем, что он убирает, и&nbsp;тем, за&nbsp;что доплачивает.</p>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-4 reveal">
+                <div class="pb-3 md:pb-4 border-b border-line mb-3 md:mb-4">
+                    <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary">Шаг 01</span>
                 </div>
-                <div class="p-8 bg-surface border border-line rounded-2xl mt-12 flex flex-col items-start">
-                    <p class="text-secondary mb-6">Собран High-Fidelity прототип. Цена пересчитывается на&nbsp;лету.</p>
-                    <button id="openModalBtn" class="px-6 py-3 bg-line hover:bg-primary text-primary hover:text-white text-xs font-bold uppercase tracking-widest transition-colors rounded-sm">Прототип</button>
+                <h4 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Исключения (Состав)</h4>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Оформлены в&nbsp;виде компактных чипсов с&nbsp;крестиком. Исключения бесплатны. Это позволило уместить 10+ ингредиентов сложного блюда в&nbsp;один блок.</p>
+            </div>
+
+            <div class="col-span-1 md:col-start-8 md:col-span-4 reveal md:delay-100">
+                <div class="pb-3 md:pb-4 border-b border-line mb-3 md:mb-4">
+                    <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary">Шаг 02</span>
+                </div>
+                <h4 class="text-lg md:text-xl font-medium mb-3 md:mb-4">Апсейл (Витрина добавок)</h4>
+                <p class="text-secondary text-sm md:text-base leading-relaxed">Полноценные строки с&nbsp;чекбоксами и&nbsp;ценой. Витрина, где прозрачно видна стоимость добавки и&nbsp;есть выбор количества через степпер.</p>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-9 md:my-8 reveal">
+                <div class="flex flex-col gap-6 md:gap-10">
+                    <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776713506/Frame_129_n3coee.png" alt="UI макет 1" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776713506/Frame_130_an83lp.png" alt="UI макет 2" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776713506/Frame_131_ls96to.png" alt="UI макет 3" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
+                <div class="p-6 md:p-8 bg-surface border border-line rounded-2xl flex flex-col items-start">
+                    <p class="w-full text-sm md:text-base text-secondary leading-relaxed mb-6">Для тестирования собран High-Fidelity прототип в&nbsp;Figma. Цена пересчитывалась на&nbsp;лету, а&nbsp;компоненты взаимодействовали с&nbsp;глобальным счетчиком, давая полное ощущение реального приложения.</p>
+                    <button id="openModalBtn" class="px-6 py-3 bg-line hover:bg-primary text-primary hover:text-white text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors duration-300 focus:outline-none">Открыть прототип</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="validation" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
+            
+            <div class="col-span-1 md:col-span-3 reveal">
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">05. Валидация</div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium mb-8 md:mb-12">UX-Тестирование</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-12">
+                    <div class="pb-4 border-b border-line">
+                        <span class="block text-[10px] md:text-xs uppercase tracking-widest text-tertiary font-semibold mb-1 md:mb-2">Выборка</span>
+                        <p class="text-base md:text-lg font-medium">74&nbsp;респондента</p>
+                    </div>
+                    <div class="pb-4 border-b border-line sm:col-span-1">
+                        <span class="block text-[10px] md:text-xs uppercase tracking-widest text-tertiary font-semibold mb-1 md:mb-2">Сценарий</span>
+                        <p class="text-sm text-secondary leading-relaxed">Удалить лук и&nbsp;кунжут, добавить платную порцию креветок.</p>
+                    </div>
+                </div>
+
+                <div class="w-full border-t border-primary">
+                    
+                    <div class="border-b border-line group">
+                        <button class="accordion-btn w-full py-6 flex justify-between items-center text-left focus:outline-none gap-4">
+                            <span class="text-lg md:text-xl font-medium pr-4">Подтвержденные решения</span>
+                            <span class="accordion-icon text-2xl font-light text-tertiary transition-colors duration-300 shrink-0">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div>
+                                <div class="pb-8 pt-2">
+                                    <div class="w-full overflow-x-auto no-scrollbar">
+                                        <table class="w-full text-left text-sm md:text-base border-collapse min-w-[600px]">
+                                            <thead>
+                                                <tr class="border-b border-line text-[10px] md:text-xs uppercase tracking-widest text-tertiary">
+                                                    <th class="py-3 font-semibold w-1/3 align-bottom">Метрика / Задача</th>
+                                                    <th class="py-3 font-semibold w-1/6 align-bottom">Рез-т</th>
+                                                    <th class="py-3 font-semibold w-1/2 align-bottom">Комментарий</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="border-b border-line/50">
+                                                    <td class="py-4 pr-4 align-top text-primary font-medium">Проходимость исключений</td>
+                                                    <td class="py-4 pr-4 align-top">
+                                                        <span class="block text-primary font-mono font-medium mb-2">100%</span>
+                                                        <span class="inline-block px-2 py-1 bg-green-50 text-green-700 border border-green-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Подтверждено</span>
+                                                    </td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Сценарий изменения состава через чипсы не&nbsp;вызвал сложностей.</td>
+                                                </tr>
+                                                <tr class="border-b border-line/50">
+                                                    <td class="py-4 pr-4 align-top text-primary font-medium">Проходимость апсейла</td>
+                                                    <td class="py-4 pr-4 align-top">
+                                                        <span class="block text-primary font-mono font-medium mb-2">100%</span>
+                                                        <span class="inline-block px-2 py-1 bg-green-50 text-green-700 border border-green-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Подтверждено</span>
+                                                    </td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Пользователи уверенно находили витрину добавок и&nbsp;пополняли блюдо.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-4 pr-4 align-top text-primary font-medium">Оценка удобства</td>
+                                                    <td class="py-4 pr-4 align-top">
+                                                        <span class="block text-primary font-mono font-medium mb-2">4.5/5</span>
+                                                        <span class="inline-block px-2 py-1 bg-green-50 text-green-700 border border-green-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Подтверждено</span>
+                                                    </td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Визуальное разделение двух паттернов сработало идеально.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-line group">
+                        <button class="accordion-btn w-full py-6 flex justify-between items-center text-left focus:outline-none gap-4">
+                            <span class="text-lg md:text-xl font-medium pr-4">Зоны роста и&nbsp;неожиданные результаты</span>
+                            <span class="accordion-icon text-2xl font-light text-tertiary transition-colors duration-300 shrink-0">+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div>
+                                <div class="pb-8 pt-2">
+                                    <div class="w-full overflow-x-auto no-scrollbar">
+                                        <table class="w-full text-left text-sm md:text-base border-collapse min-w-[600px]">
+                                            <thead>
+                                                <tr class="border-b border-line text-[10px] md:text-xs uppercase tracking-widest text-tertiary">
+                                                    <th class="py-3 font-semibold w-1/3 align-bottom">Метрика / Задача</th>
+                                                    <th class="py-3 font-semibold w-1/6 align-bottom">Рез-т</th>
+                                                    <th class="py-3 font-semibold w-1/2 align-bottom">Комментарий</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="border-b border-line/50">
+                                                    <td class="py-4 pr-4 align-top text-primary font-medium">Доверие к&nbsp;интерфейсу</td>
+                                                    <td class="py-4 pr-4 align-top">
+                                                        <span class="block text-primary font-mono font-medium mb-2">27%</span>
+                                                        <span class="inline-block px-2 py-1 bg-red-50 text-red-600 border border-red-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Не подтверждено</span>
+                                                    </td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Продублируют исключения текстом «на&nbsp;всякий случай». Требуется время на&nbsp;адаптацию к&nbsp;фиче.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-4 pr-4 align-top text-primary font-medium">Заметность статусов</td>
+                                                    <td class="py-4 pr-4 align-top">
+                                                        <span class="block text-primary font-mono font-medium mb-2">77%</span>
+                                                        <span class="inline-block px-2 py-1 bg-red-50 text-red-600 border border-red-100 text-[10px] uppercase tracking-widest font-semibold rounded-sm whitespace-nowrap">Не подтверждено</span>
+                                                    </td>
+                                                    <td class="py-4 align-top text-secondary leading-relaxed">Не&nbsp;заметили плашку «Изменено». Отказ от&nbsp;фичи в&nbsp;пользу экономии часов разработки.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
     <section id="result" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto border-b border-line">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8">
-            <div class="col-span-1 md:col-span-3 reveal"><div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">06. Результат</div></div>
-            <div class="col-span-1 md:col-start-4 md:col-span-9 reveal">
-                <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776610820/Frame_126_bol2uz.png" class="w-full rounded-2xl border border-line">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-10 md:gap-y-12">
+            <div class="col-span-1 md:col-span-3 reveal">
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">06. Итоговый результат</div>
             </div>
-        </div>
-    </section>
 
-    <section id="conclusions" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12">
-            <div class="col-span-1 md:col-span-3 reveal"><div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">07. Выводы</div></div>
-            <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
-                <h3 class="text-2xl sm:text-3xl font-medium mb-12">Решение успешно закрыло бизнес-задачу: контроль над&nbsp;едой напрямую влияет на&nbsp;снижение возвратов.</h3>
-                <div class="space-y-8">
-                    <div class="pt-8 border-t border-primary">
-                        <h4 class="text-lg font-medium mb-4">01. Интерфейс решает задачу, но&nbsp;не&nbsp;сразу меняет привычку</h4>
-                        <p class="text-sm text-primary bg-white p-4 border border-line rounded-2xl">Доверие к&nbsp;кастомизации сформируется только после нескольких успешных доставок.</p>
-                    </div>
-                    <div class="pt-8 border-t border-line">
-                        <h4 class="text-lg font-medium mb-4">02. Отказ от&nbsp;избыточных статусов</h4>
-                        <p class="text-sm text-primary bg-white p-4 border border-line rounded-2xl">Пользователи игнорируют плашку «Изменено», фокусируясь на&nbsp;итоговой цене.</p>
-                    </div>
+            <!-- Чистая статичная картинка без раздражающих ховеров -->
+            <div class="col-span-1 md:col-start-4 md:col-span-9 reveal">
+                <div class="w-full relative overflow-hidden rounded-2xl border border-line bg-[#f0f0f0]">
+                    <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776610820/Frame_126_bol2uz.png" alt="Итоговый результат" class="w-full h-auto object-cover">
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="global-header"></div>
-    <script src="header.js"></script>
+    <section id="conclusions" class="py-16 md:py-24 px-6 md:px-16 max-w-[1600px] mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-12 md:gap-y-16">
+            
+            <div class="col-span-1 md:col-span-3 reveal">
+                <div class="text-xs uppercase tracking-widest text-tertiary font-semibold md:sticky md:top-20">07. Выводы</div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-6 reveal md:mb-8">
+                <h3 class="text-2xl sm:text-3xl font-medium md:mb-6">Итоговое решение успешно закрыло бизнес-задачу: мы&nbsp;дали пользователям понятный контроль над едой, что напрямую влияет на&nbsp;снижение возвратов и&nbsp;рост среднего чека.</h3>
+                <p class="text-secondary text-base md:text-lg">UX-тестирование подтвердило гипотезы, но&nbsp;также выявило важные зоны для упрощения макета перед разработкой.</p>
+            </div>
+            
+            <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
+                <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-primary">
+                    <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">01</div>
+                    <div class="md:col-span-3 mb-2 md:mb-0">
+                        <h4 class="text-lg md:text-xl font-medium">Интерфейс решает задачу, но&nbsp;не&nbsp;сразу меняет привычку</h4>
+                    </div>
+                    <div class="md:col-span-4">
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> 27% респондентов отметили, что всё равно продублировали&nbsp;бы свои исключения в&nbsp;комментариях к&nbsp;заказу.</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line rounded-2xl leading-relaxed"><strong class="font-semibold">Вывод:</strong> Паттерн недоверия к&nbsp;доставкам укоренен глубоко. Новый UI решает задачу (людям удобно нажимать), но&nbsp;абсолютное доверие к&nbsp;кастомизации сформируется только после нескольких успешных доставок.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
+                <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-line">
+                    <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">02</div>
+                    <div class="md:col-span-3 mb-2 md:mb-0">
+                        <h4 class="text-lg md:text-xl font-medium">Отказ от&nbsp;избыточных статусов (экономим время)</h4>
+                    </div>
+                    <div class="md:col-span-4">
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> В&nbsp;прототипе была заложена логика текстовых микро-статусов (плашка «Изменено»). 77% пользователей её проигнорировали.</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line rounded-2xl leading-relaxed"><strong class="font-semibold">Вывод:</strong> Отказ от&nbsp;текстовых статусов снизит визуальный шум и&nbsp;сэкономит ресурсы разработки. Главный триггер для юзера — автоматический пересчет итоговой суммы.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-1 md:col-start-4 md:col-span-8 reveal">
+                <div class="grid grid-cols-1 md:grid-cols-8 gap-x-8 gap-y-4 pt-6 md:pt-8 border-t border-line md:pb-8 md:border-b">
+                    <div class="col-span-1 text-2xl font-light text-tertiary mb-2 md:mb-0">03</div>
+                    <div class="md:col-span-3 mb-2 md:mb-0">
+                        <h4 class="text-lg md:text-xl font-medium">Гипотеза с&nbsp;разделением паттернов подтвердилась</h4>
+                    </div>
+                    <div class="md:col-span-4">
+                        <p class="text-sm md:text-base text-secondary leading-relaxed mb-4"><strong class="text-primary font-medium">Факт:</strong> Изначально был риск, что использование разных стилей (чипсы для исключений и&nbsp;списки для добавок) может запутать пользователя.</p>
+                        <p class="text-sm text-primary bg-white p-4 border border-line rounded-2xl leading-relaxed"><strong class="font-semibold">Вывод:</strong> Показатель Task Success Rate в&nbsp;100% доказал обратное. Пользователи с&nbsp;первой секунды считывают разницу между «составом блюда» и&nbsp;«витриной апсейла».</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <div id="global-footer"></div>
     <script src="footer.js"></script>
 
-    <div id="imageModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-4">
-        <div id="modalBackdrop" class="absolute inset-0 bg-[#111]/90 backdrop-blur-md transition-opacity duration-300 opacity-0 cursor-pointer"></div>
-        <button id="closeModalBtn" class="fixed top-8 right-8 z-[110] text-white focus:outline-none">✕</button>
-        <div id="modalContent" class="relative z-10 max-w-5xl w-full transform scale-95 opacity-0 transition-all duration-300">
-            <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1776605693/Section_1_vimlhs.png" class="w-full rounded-2xl">
-        </div>
-    </div>
+    <!-- ОВЕРЛЕЙ ДЛЯ АНИМАЦИИ ПЕРЕХОДА (ИЗМЕНЕН ЦВЕТ НА bg-[#F9F9F9]) -->
+    <div id="transition-overlay" class="fixed inset-0 bg-[#F9F9F9] z-[9999] pointer-events-none transition-transform duration-700 ease-[cubic-bezier(0.7,0,0.3,1)] translate-y-full"></div>
 
+    <!-- Скрипт для анимаций -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
-            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            // Инициализация Lenis (Плавный скролл)
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smooth: true,
+                smoothTouch: false,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
             requestAnimationFrame(raf);
 
             function animateValue(obj, start, end, duration, isFloat, suffix) {
@@ -227,45 +557,118 @@
                 const step = (timestamp) => {
                     if (!startTimestamp) startTimestamp = timestamp;
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    const val = start + (progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)) * (end - start);
-                    obj.innerHTML = (isFloat ? val.toFixed(1) : Math.floor(val)) + suffix;
-                    if (progress < 1) window.requestAnimationFrame(step);
+                    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    let currentVal = start + easeProgress * (end - start);
+                    
+                    if (isFloat) {
+                        obj.innerHTML = currentVal.toFixed(1) + suffix;
+                    } else {
+                        obj.innerHTML = Math.floor(currentVal) + suffix;
+                    }
+                    
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        obj.innerHTML = (isFloat ? end.toFixed(1) : end) + suffix;
+                    }
                 };
                 window.requestAnimationFrame(step);
             }
 
-            const observer = new IntersectionObserver((entries) => {
+            // Анимация при загрузке (когда возвращаемся с кейса)
+            const overlay = document.getElementById('transition-overlay');
+            
+            if (overlay) {
+                // ИСПРАВЛЕНИЕ: Мгновенно отключаем анимацию, ставим шторку по центру
+                overlay.style.transition = 'none';
+                overlay.style.transform = 'translateY(0)';
+                
+                // В следующем кадре возвращаем анимацию и убираем шторку вниз
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        overlay.style.transition = '';
+                        overlay.style.transform = 'translateY(100%)';
+                    });
+                });
+            }
+
+            document.querySelectorAll('.project-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('href');
+                    
+                    if (overlay) {
+                        // Шторка выезжает снизу и перекрывает экран
+                        overlay.style.transform = 'translateY(0)';
+                        
+                        setTimeout(() => {
+                            window.location.assign(target);
+                        }, 600);
+                    } else {
+                        window.location.assign(target);
+                    }
+                });
+            });
+
+            // Наблюдатель за появлением элементов
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        const counter = entry.target.querySelector('.counter');
-                        if (counter && !counter.dataset.animated) {
-                            counter.dataset.animated = 'true';
-                            animateValue(counter, 0, parseFloat(counter.dataset.target), 2000, counter.dataset.float === 'true', counter.dataset.suffix || '');
+                        
+                        if (entry.target.classList.contains('counter-block')) {
+                            const counterEl = entry.target.querySelector('.counter');
+                            if (counterEl && !counterEl.dataset.animated) {
+                                counterEl.dataset.animated = 'true';
+                                const target = parseFloat(counterEl.dataset.target);
+                                const isFloat = counterEl.dataset.float === 'true';
+                                const suffix = counterEl.dataset.suffix || '';
+                                animateValue(counterEl, 0, target, 2000, isFloat, suffix);
+                            }
                         }
                     }
                 });
-            }, { threshold: 0.15 });
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            }, observerOptions);
 
+            document.querySelectorAll('.reveal').forEach((el) => {
+                observer.observe(el);
+            });
+
+            // НАВИГАЦИЯ
             const navbar = document.getElementById('navbar');
-            const progress = document.getElementById('scroll-progress');
+            const hero = document.getElementById('hero');
+            const scrollProgress = document.getElementById('scroll-progress');
             const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
 
             window.addEventListener('scroll', () => {
-                navbar.classList.toggle('-translate-y-full', window.scrollY < 400);
-                progress.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + "%";
+                const heroBottom = hero ? hero.offsetTop + hero.offsetHeight : 0;
+                if (window.scrollY > heroBottom - 100) {
+                    if (navbar) navbar.classList.remove('-translate-y-full');
+                } else {
+                    if (navbar) navbar.classList.add('-translate-y-full');
+                }
 
-                // Логика подсветки текущего раздела в статус-баре
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = height ? (winScroll / height) * 100 : 0;
+                if (scrollProgress) scrollProgress.style.width = scrolled + "%";
+
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    if (window.scrollY >= (sectionTop - 150)) {
+                    if (pageYOffset >= (sectionTop - 150)) {
                         current = section.getAttribute('id');
                     }
                 });
 
-                document.querySelectorAll('.nav-link').forEach(link => {
+                navLinks.forEach(link => {
                     link.classList.remove('text-primary');
                     if (link.getAttribute('data-target') === current) {
                         link.classList.add('text-primary');
@@ -273,36 +676,83 @@
                 });
             });
 
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
+            // Плавный скролл при клике на ссылки через Lenis
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    lenis.scrollTo(document.getElementById(link.getAttribute('data-target')), { offset: -60 });
+                    const targetId = this.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        lenis.scrollTo(targetSection, { 
+                            offset: -60,
+                            duration: 1.2
+                        });
+                    }
                 });
             });
 
+            // АККОРДЕОН
             document.querySelectorAll('.accordion-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const content = btn.nextElementSibling;
+                btn.addEventListener('click', function() {
+                    const group = this.closest('.group');
+                    const content = group.querySelector('.accordion-content');
+                    const icon = group.querySelector('.accordion-icon');
+                    const title = group.querySelector('.hypothesis-title');
+                    
                     content.classList.toggle('expanded');
-                    btn.querySelector('.accordion-icon').textContent = content.classList.contains('expanded') ? '−' : '+';
+                    
+                    if (content.classList.contains('expanded')) {
+                        if(icon) icon.textContent = '−';
+                        if(icon) icon.classList.add('text-primary');
+                        if(icon) icon.classList.remove('text-tertiary');
+                        if (title) {
+                            title.classList.add('text-primary');
+                            title.classList.remove('text-tertiary');
+                        }
+                    } else {
+                        if(icon) icon.textContent = '+';
+                        if(icon) icon.classList.remove('text-primary');
+                        if(icon) icon.classList.add('text-tertiary');
+                        if (title) {
+                            title.classList.remove('text-primary');
+                            title.classList.add('text-tertiary');
+                        }
+                    }
                 });
             });
 
+            // МОДАЛЬНОЕ ОКНО
             const modal = document.getElementById('imageModal');
-            const mContent = document.getElementById('modalContent');
-            const mBackdrop = document.getElementById('modalBackdrop');
-            document.getElementById('openModalBtn').onclick = () => {
+            const openBtn = document.getElementById('openModalBtn');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const backdrop = document.getElementById('modalBackdrop');
+            const content = document.getElementById('modalContent');
+
+            function openModal() {
+                if(!modal) return;
                 modal.classList.remove('hidden');
-                setTimeout(() => { mBackdrop.classList.replace('opacity-0', 'opacity-100'); mContent.classList.replace('scale-95', 'scale-100'); mContent.classList.replace('opacity-0', 'opacity-100'); }, 10);
+                requestAnimationFrame(() => {
+                    if(backdrop) backdrop.classList.remove('opacity-0');
+                    if(content) content.classList.remove('scale-95', 'opacity-0');
+                    if(content) content.classList.add('scale-100', 'opacity-100');
+                });
                 document.body.style.overflow = 'hidden';
-            };
-            const closeM = () => {
-                mBackdrop.classList.replace('opacity-100', 'opacity-0');
-                mContent.classList.replace('scale-100', 'scale-95');
-                setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 300);
-            };
-            document.getElementById('closeModalBtn').onclick = closeM;
-            mBackdrop.onclick = closeM;
+            }
+
+            function closeModal() {
+                if(!modal) return;
+                if(backdrop) backdrop.classList.add('opacity-0');
+                if(content) content.classList.remove('scale-100', 'opacity-100');
+                if(content) content.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+
+            if (openBtn) openBtn.addEventListener('click', openModal);
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (backdrop) backdrop.addEventListener('click', closeModal);
         });
     </script>
 </body>
