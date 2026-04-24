@@ -207,9 +207,6 @@
     <div id="global-footer"></div>
     <script src="footer.js"></script>
 
-    <!-- ОВЕРЛЕЙ ДЛЯ АНИМАЦИИ ПЕРЕХОДА -->
-    <div id="transition-overlay" class="fixed inset-0 bg-primary z-[9999] pointer-events-none transition-transform duration-700 ease-[cubic-bezier(0.7,0,0.3,1)] translate-y-full"></div>
-
     <!-- Скрипт для анимаций -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -239,37 +236,6 @@
                             offset: -60, // Учет высоты навбара
                             duration: 1.2
                         });
-                    }
-                });
-            });
-
-            // Анимация при переходе на кейс (ШТОРКА)
-            const overlay = document.getElementById('transition-overlay');
-            
-            if (overlay) {
-                // Если мы возвращаемся с кейса, шторка должна уехать вниз
-                // (Небольшой хак для красивого возврата)
-                overlay.style.transform = 'translateY(0)'; // Ставим по центру
-                requestAnimationFrame(() => {
-                    overlay.style.transform = 'translateY(100%)'; // Уезжает вниз
-                });
-            }
-
-            document.querySelectorAll('.project-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = this.href;
-                    
-                    if (overlay) {
-                        // Шторка выезжает снизу и перекрывает экран
-                        overlay.style.transform = 'translateY(0)';
-                        
-                        // Переходим на новую страницу, когда экран полностью черный
-                        setTimeout(() => {
-                            window.location.href = target;
-                        }, 600);
-                    } else {
-                        window.location.href = target;
                     }
                 });
             });
