@@ -133,7 +133,7 @@
             <div class="col-span-1 md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 md:gap-y-24">
                 
                 <!-- КАРТОЧКА 1: Кастомизация блюд -->
-                <a href="https://baskove33.github.io/nikproduct/ux" class="group block reveal delay-100">
+                <a href="https://baskove33.github.io/nikproduct/ux" class="project-link group block reveal delay-100">
                     <!-- Обложка -->
                     <div class="w-full aspect-[4/3] bg-[#f0f0f0] rounded-xl overflow-hidden mb-6 md:mb-8 border border-line relative">
                         <!-- Используем красивый рендер из кейса для обложки -->
@@ -158,7 +158,7 @@
                         <span class="text-[10px] uppercase tracking-widest text-tertiary font-semibold py-1">UX/UI</span>
                     </div>
                     
-                    <!-- Название (Один из предложенных вариантов) -->
+                    <!-- Название -->
                     <div class="flex items-center justify-between">
                         <h3 class="text-2xl md:text-3xl font-medium text-primary group-hover:text-secondary transition-colors duration-300">Безопасный заказ: как дать пользователям контроль над&nbsp;составом</h3>
                         <!-- Иконка стрелки -->
@@ -207,15 +207,18 @@
     <div id="global-footer"></div>
     <script src="footer.js"></script>
 
+    <!-- ОВЕРЛЕЙ ДЛЯ АНИМАЦИИ ПЕРЕХОДА -->
+    <div id="transition-overlay" class="fixed inset-0 bg-primary z-[9999] pointer-events-none transition-transform duration-700 ease-[cubic-bezier(0.7,0,0.3,1)] translate-y-full"></div>
+
     <!-- Скрипт для анимаций -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- ИНИЦИАЛИЗАЦИЯ LENIS (ПЛАВНЫЙ СКРОЛЛ ВСЕЙ СТРАНИЦЫ) ---
+            // Инициализация Lenis (Плавный скролл)
             const lenis = new Lenis({
                 duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Фирменная кривая Безье
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                 smooth: true,
-                smoothTouch: false, // На телефонах оставляем нативный скролл для удобства
+                smoothTouch: false,
             });
 
             function raf(time) {
@@ -236,6 +239,37 @@
                             offset: -60, // Учет высоты навбара
                             duration: 1.2
                         });
+                    }
+                });
+            });
+
+            // Анимация при переходе на кейс (ШТОРКА)
+            const overlay = document.getElementById('transition-overlay');
+            
+            if (overlay) {
+                // Если мы возвращаемся с кейса, шторка должна уехать вниз
+                // (Небольшой хак для красивого возврата)
+                overlay.style.transform = 'translateY(0)'; // Ставим по центру
+                requestAnimationFrame(() => {
+                    overlay.style.transform = 'translateY(100%)'; // Уезжает вниз
+                });
+            }
+
+            document.querySelectorAll('.project-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.href;
+                    
+                    if (overlay) {
+                        // Шторка выезжает снизу и перекрывает экран
+                        overlay.style.transform = 'translateY(0)';
+                        
+                        // Переходим на новую страницу, когда экран полностью черный
+                        setTimeout(() => {
+                            window.location.href = target;
+                        }, 600);
+                    } else {
+                        window.location.href = target;
                     }
                 });
             });
