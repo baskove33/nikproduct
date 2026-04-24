@@ -250,9 +250,27 @@
 
             const navbar = document.getElementById('navbar');
             const progress = document.getElementById('scroll-progress');
+            const sections = document.querySelectorAll('section[id]');
+
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('-translate-y-full', window.scrollY < 400);
                 progress.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + "%";
+
+                // Логика подсветки текущего раздела в статус-баре
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('text-primary');
+                    if (link.getAttribute('data-target') === current) {
+                        link.classList.add('text-primary');
+                    }
+                });
             });
 
             document.querySelectorAll('.nav-link').forEach(link => {
