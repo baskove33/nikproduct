@@ -76,6 +76,91 @@
             background: linear-gradient(135deg, transparent 48%, rgba(0,0,0,0.02) 50%, transparent 52%);
             background-size: 16px 16px;
         }
+
+        /* --- Анимации для секции "Обо мне" --- */
+        .about-text-anim {
+            opacity: 0;
+            filter: blur(16px);
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, filter 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        .about-text-anim.active {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .about-text-anim.exit {
+            opacity: 0;
+            filter: blur(16px);
+            transform: translateY(-24px);
+        }
+        .about-text-anim.pre {
+            opacity: 0;
+            filter: blur(16px);
+            transform: translateY(24px);
+        }
+
+        .about-img-anim {
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 1s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .about-img-anim.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        /* --- Стили для переключения фото команды (Эффект тасования карточек) --- */
+        .team-photo {
+            position: absolute;
+            width: 65%;
+            height: 75%;
+            top: 12.5%;
+            left: 17.5%;
+            object-fit: cover;
+            border-radius: 1rem;
+            border: 4px solid #FFFFFF;
+        }
+        
+        /* Начальные состояния */
+        .state-back {
+            transform: translate(-12%, -6%) scale(0.9) rotate(-4deg);
+            z-index: 1;
+            opacity: 0.6;
+            filter: grayscale(20%);
+        }
+        
+        .state-front {
+            transform: translate(12%, 6%) scale(1) rotate(2deg);
+            z-index: 2;
+            opacity: 1;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+            filter: grayscale(0%);
+        }
+
+        /* Классы для запуска анимаций */
+        .anim-to-front { animation: shuffleToFront 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .anim-to-back { animation: shuffleToBack 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+        /* Анимация: из заднего плана на передний (вылет вправо) */
+        @keyframes shuffleToFront {
+            0% { transform: translate(-12%, -6%) scale(0.9) rotate(-4deg); z-index: 1; opacity: 0.6; filter: grayscale(20%); }
+            50% { transform: translate(50%, -15%) scale(0.95) rotate(8deg); z-index: 2; opacity: 1; filter: grayscale(0%); box-shadow: 0 24px 60px rgba(0,0,0,0.12); }
+            100% { transform: translate(12%, 6%) scale(1) rotate(2deg); z-index: 2; opacity: 1; box-shadow: 0 24px 60px rgba(0,0,0,0.12); filter: grayscale(0%); }
+        }
+
+        /* Анимация: с переднего плана на задний (вылет влево) */
+        @keyframes shuffleToBack {
+            0% { transform: translate(12%, 6%) scale(1) rotate(2deg); z-index: 2; opacity: 1; box-shadow: 0 24px 60px rgba(0,0,0,0.12); filter: grayscale(0%); }
+            50% { transform: translate(-50%, 15%) scale(0.95) rotate(-8deg); z-index: 1; opacity: 0.8; filter: grayscale(10%); box-shadow: none; }
+            100% { transform: translate(-12%, -6%) scale(0.9) rotate(-4deg); z-index: 1; opacity: 0.6; filter: grayscale(20%); box-shadow: none; }
+        }
     </style>
 </head>
 <body class="selection:bg-primary selection:text-white flex flex-col min-h-screen">
@@ -87,6 +172,7 @@
                 Product Designer
             </div>
             <ul class="flex gap-6 md:gap-8 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-tertiary">
+                <li><a href="#about" class="hover:text-primary transition-colors smooth-scroll">Обо мне</a></li>
                 <li><a href="#work" class="hover:text-primary transition-colors smooth-scroll">Кейсы</a></li>
                 <li><a href="#global-footer" class="hover:text-primary transition-colors smooth-scroll">Контакты</a></li>
             </ul>
@@ -136,16 +222,13 @@
                 <a href="https://baskove33.github.io/nikproduct/ux" class="project-link group block reveal delay-100">
                     <!-- Обложка -->
                     <div class="w-full aspect-[4/3] bg-[#f0f0f0] rounded-xl overflow-hidden mb-6 md:mb-8 border border-line relative">
-                        <!-- Используем красивый рендер из кейса для обложки -->
                         <img src="https://res.cloudinary.com/dt79npeea/image/upload/f_auto,q_auto/v1777028454/Frame_132_y19iis.png" alt="Кастомизация блюд" class="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-[1.03]">
                         
-                        <!-- Оверлей при ховере с метриками успеха -->
                         <div class="absolute inset-0 bg-primary/85 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center text-white p-6 text-center">
                             <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
                                 <div class="text-4xl md:text-5xl font-light mb-1">100%</div>
                                 <div class="text-[10px] md:text-xs font-semibold uppercase tracking-widest text-tertiary mb-6">Проходимость сценария</div>
                                 
-                                <!-- Исправлена точка на запятую в метриках -->
                                 <div class="text-4xl md:text-5xl font-light mb-1">4,5<span class="text-xl md:text-2xl text-tertiary">/5</span></div>
                                 <div class="text-[10px] md:text-xs font-semibold uppercase tracking-widest text-tertiary">Оценка удобства (CES)</div>
                             </div>
@@ -161,12 +244,10 @@
                     <!-- Название -->
                     <div class="flex items-center justify-between">
                         <h3 class="text-2xl md:text-3xl font-medium text-primary group-hover:text-secondary transition-colors duration-300">Безопасный заказ: как дать пользователям контроль над&nbsp;составом</h3>
-                        <!-- Иконка стрелки -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-tertiary transform -rotate-45 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                     </div>
-                    <!-- Краткое описание -->
                     <p class="text-secondary mt-3 md:mt-4 text-sm md:text-base leading-relaxed max-w-[90%]">
                         Как дать пользователю контроль над&nbsp;едой, снизить количество возвратов и&nbsp;поднять средний чек ресторана.
                     </p>
@@ -188,12 +269,10 @@
                     <!-- Название -->
                     <div class="flex items-center justify-between">
                         <h3 class="text-2xl md:text-3xl font-medium text-primary group-hover:text-secondary transition-colors duration-300">Название следующего проекта</h3>
-                        <!-- Иконка стрелки -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-tertiary opacity-0 transform -rotate-45 group-hover:opacity-100 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                     </div>
-                    <!-- Краткое описание -->
                     <p class="text-secondary mt-3 md:mt-4 text-sm md:text-base leading-relaxed max-w-[90%]">
                         Короткое описание бизнес-задачи, которую решал интерфейс, и&nbsp;достигнутых результатов.
                     </p>
@@ -202,6 +281,88 @@
             </div>
         </div>
     </main>
+
+    <!-- СЕКЦИЯ "ОБО МНЕ" (Скролл-сторителлинг) -->
+    <section id="about" class="relative h-[300vh] md:h-[400vh]">
+        <!-- Липкий контейнер -->
+        <div class="sticky top-0 h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-surface">
+            
+            <!-- Внутренняя сетка -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-0 gap-x-8 items-center w-full max-w-[1600px] mx-auto px-6 md:px-16">
+                
+                <!-- Левая колонка: Тексты -->
+                <div class="col-span-1 md:col-span-7 lg:col-span-6 relative h-[280px] sm:h-[300px] md:h-[400px]">
+                    
+                    <!-- Слайд 1: Community -->
+                    <div class="about-text-anim active absolute inset-0 flex flex-col justify-center">
+                        <div class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary mb-4 md:mb-6">01 / Community</div>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-4 md:mb-6 leading-[1.1] tracking-tight">Профессиональная среда</h3>
+                        <p class="text-secondary text-base md:text-lg lg:text-xl leading-relaxed max-w-[90%] font-light">
+                            Мне важно быть внутри профессиональной среды: обсуждать решения, смотреть на чужие подходы и сверять свой взгляд с тем, как меняется индустрия. Это помогает не замыкаться в личных привычках и проектировать точнее.
+                        </p>
+                    </div>
+
+                    <!-- Слайд 2: Travel -->
+                    <div class="about-text-anim pre absolute inset-0 flex flex-col justify-center">
+                        <div class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary mb-4 md:mb-6">02 / Travel</div>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-4 md:mb-6 leading-[1.1] tracking-tight">Насмотренность</h3>
+                        <p class="text-secondary text-base md:text-lg lg:text-xl leading-relaxed max-w-[90%] font-light">
+                            Путешествия учат замечать неочевидное. Изучая разные сценарии поведения и то, как физическая среда влияет на людей, я лучше понимаю, как строить интуитивный и естественный цифровой опыт.
+                        </p>
+                    </div>
+
+                    <!-- Слайд 3: Hobby -->
+                    <div class="about-text-anim pre absolute inset-0 flex flex-col justify-center">
+                        <div class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary mb-4 md:mb-6">03 / Focus</div>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-4 md:mb-6 leading-[1.1] tracking-tight">Концентрация и стратегия</h3>
+                        <p class="text-secondary text-base md:text-lg lg:text-xl leading-relaxed max-w-[90%] font-light">
+                            Мне интересны активности, где важны спокойствие и точность — например, бильярд. Умение сфокусироваться и просчитать шаги вперед отлично перекладывается на создание масштабного системного дизайна.
+                        </p>
+                    </div>
+
+                    <!-- Слайд 4: Team -->
+                    <div class="about-text-anim pre absolute inset-0 flex flex-col justify-center">
+                        <div class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-tertiary mb-4 md:mb-6">04 / Team</div>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-4 md:mb-6 leading-[1.1] tracking-tight">Командный игрок</h3>
+                        <p class="text-secondary text-base md:text-lg lg:text-xl leading-relaxed max-w-[90%] font-light">
+                            Дизайн не существует в вакууме. Я умею слышать коллег, конструктивно работать с обратной связью и аргументировать решения, чтобы вместе доводить сложный продукт до успешного релиза.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: Фотографии -->
+                <div class="col-span-1 md:col-start-8 md:col-span-5 lg:col-start-8 lg:col-span-5 relative">
+                    <!-- Полностью прозрачный контейнер (без серого прямоугольника и бордеров) -->
+                    <div class="relative w-full aspect-[4/3]">
+                        
+                        <!-- Одиночные фото со своими собственными рамками -->
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1777634869/IMG_5170_aggojp.jpg" alt="Community" class="about-img-anim active absolute inset-0 w-full h-full object-cover rounded-2xl border border-line bg-[#f0f0f0] shadow-sm">
+                        <img src="/images/about-travel.jpg" alt="Travel" class="about-img-anim absolute inset-0 w-full h-full object-cover rounded-2xl border border-line bg-[#f0f0f0] shadow-sm" onerror="this.style.display='none'">
+                        <img src="https://res.cloudinary.com/dt79npeea/image/upload/v1777635118/IMG_7191_1_gt8fyz.png" alt="Hobby" class="about-img-anim absolute inset-0 w-full h-full object-cover rounded-2xl border border-line bg-[#f0f0f0] shadow-sm">
+                        
+                        <!-- Слайд команды (Карточный shuffle) -->
+                        <div id="team-photos-wrapper" class="about-img-anim absolute inset-0 w-full h-full bg-transparent">
+                            <!-- Заднее фото -->
+                            <img id="team-photo-1" src="https://res.cloudinary.com/dt79npeea/image/upload/v1777635116/photo_2026-05-01_16-31-46_o6idtn.jpg" alt="Team 1" class="team-photo state-back">
+                            
+                            <!-- Переднее фото (центрируем по верху, чтобы не резать лица) -->
+                            <img id="team-photo-2" src="https://res.cloudinary.com/dt79npeea/image/upload/v1777635117/IMG_7226_1_tx8tzj.png" alt="Team 2" class="team-photo state-front" style="object-position: center top;">
+
+                            <!-- Кнопка смены -->
+                            <button id="swap-photos-btn" class="absolute bottom-5 left-5 z-20 flex items-center justify-center gap-2 px-4 py-2.5 bg-white/90 backdrop-blur-md border border-line rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm group cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform transition-transform duration-500 group-hover:rotate-180">
+                                    <path d="M7 10v12"/><path d="M11 18l-4 4-4-4"/><path d="M17 14V2"/><path d="M13 6l4-4 4 4"/>
+                                </svg>
+                                <span class="mt-[1px]">Поменять фото</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <!-- ПОДКЛЮЧЕНИЕ ГЛОБАЛЬНОГО ФУТЕРА -->
     <div id="global-footer"></div>
@@ -224,23 +385,26 @@
             }
             requestAnimationFrame(raf);
 
-            // Плавный скролл по якорным ссылкам в навигации
+            // Плавный скролл по якорным ссылкам
             const navLinks = document.querySelectorAll('.smooth-scroll');
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        lenis.scrollTo(targetSection, {
-                            offset: -60, // Учет высоты навбара
-                            duration: 1.2
-                        });
+                    const href = this.getAttribute('href');
+                    if(href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        const targetSection = document.getElementById(targetId);
+                        if (targetSection) {
+                            lenis.scrollTo(targetSection, {
+                                offset: -60, // Учет высоты навбара
+                                duration: 1.2
+                            });
+                        }
                     }
                 });
             });
 
-            // Наблюдатель за появлением элементов
+            // Наблюдатель за появлением элементов (.reveal)
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -259,6 +423,97 @@
             document.querySelectorAll('.reveal').forEach((el) => {
                 observer.observe(el);
             });
+
+            // === Логика переключения фотографий в блоке Team (Shuffle) ===
+            const swapBtn = document.getElementById('swap-photos-btn');
+            const teamPhoto1 = document.getElementById('team-photo-1');
+            const teamPhoto2 = document.getElementById('team-photo-2');
+            
+            if (swapBtn && teamPhoto1 && teamPhoto2) {
+                let p1IsFront = false; // По умолчанию photo-2 спереди
+
+                swapBtn.addEventListener('click', () => {
+                    // Очищаем текущие классы
+                    teamPhoto1.classList.remove('state-front', 'state-back', 'anim-to-front', 'anim-to-back');
+                    teamPhoto2.classList.remove('state-front', 'state-back', 'anim-to-front', 'anim-to-back');
+                    
+                    // Форсируем перерисовку (чтобы браузер заново запустил keyframes)
+                    void teamPhoto1.offsetWidth;
+                    void teamPhoto2.offsetWidth;
+
+                    // Применяем анимацию в зависимости от текущего состояния
+                    if (p1IsFront) {
+                        teamPhoto1.classList.add('anim-to-back');
+                        teamPhoto2.classList.add('anim-to-front');
+                    } else {
+                        teamPhoto1.classList.add('anim-to-front');
+                        teamPhoto2.classList.add('anim-to-back');
+                    }
+                    
+                    p1IsFront = !p1IsFront;
+                });
+            }
+
+            // === Логика анимации для секции "Обо мне" ===
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                const textItems = document.querySelectorAll('.about-text-anim');
+                const imageItems = document.querySelectorAll('.about-img-anim');
+                const totalItems = textItems.length;
+
+                // Оптимизация: запускаем расчет только если секция в зоне видимости
+                let isAboutInView = false;
+                const aboutObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        isAboutInView = entry.isIntersecting;
+                    });
+                }, { rootMargin: "200px 0px" });
+                aboutObserver.observe(aboutSection);
+
+                function updateAboutScroll() {
+                    if (isAboutInView) {
+                        const rect = aboutSection.getBoundingClientRect();
+                        const windowHeight = window.innerHeight;
+                        
+                        // Максимальная дистанция скролла = Высота секции минус высота окна (липкой зоны)
+                        const maxScroll = aboutSection.offsetHeight - windowHeight;
+                        
+                        // Вычисляем прогресс от 0 до 1
+                        let progress = -rect.top / maxScroll;
+                        progress = Math.max(0, Math.min(1, progress));
+
+                        // Вычисляем активный индекс
+                        let currentIndex = Math.floor(progress * totalItems);
+                        if (currentIndex >= totalItems) currentIndex = totalItems - 1;
+
+                        // Применяем классы для текста
+                        textItems.forEach((item, index) => {
+                            if (index === currentIndex) {
+                                item.classList.add('active');
+                                item.classList.remove('exit', 'pre');
+                            } else if (index < currentIndex) {
+                                item.classList.remove('active', 'pre');
+                                item.classList.add('exit'); // Прокручено (уходит вверх)
+                            } else {
+                                item.classList.remove('active', 'exit');
+                                item.classList.add('pre'); // Ещё предстоит (ждет внизу)
+                            }
+                        });
+
+                        // Применяем классы для фото
+                        imageItems.forEach((item, index) => {
+                            if (index === currentIndex) {
+                                item.classList.add('active');
+                            } else {
+                                item.classList.remove('active');
+                            }
+                        });
+                    }
+                    requestAnimationFrame(updateAboutScroll);
+                }
+                // Запускаем цикл для секции "Обо мне"
+                requestAnimationFrame(updateAboutScroll);
+            }
         });
     </script>
 </body>
